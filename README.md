@@ -97,3 +97,30 @@ The offline Linux smoke test passed. The complete Linux RP OCR batch hit a
 and Linux output for Tesseract. The batch times describe their individual
 platforms. Recognition results cover this synthetic suite.
 [RP OCR transcripts](benchmarks/macos-arm64.json) · [Tesseract transcripts](benchmarks/linux-arm64.json)
+
+### Tesseract configuration audit
+
+A direct single-image rerun reproduced the original shadowed invoice output
+of `PLIES` with Tesseract 5.5.0, `eng+ind`, and PSM 1. Switching only to
+`-c thresholding_method=2` (Sauvola) recovered the complete invoice with zero
+character edits. This establishes that the original failure depends on the
+selected thresholding configuration.
+
+| Input | PSM 1, Otsu | PSM 1, Sauvola | PSM 6, Otsu | PSM 6, Sauvola |
+| --- | ---: | ---: | ---: | ---: |
+| Shadowed invoice | 218 | 0 | 222 | 0 |
+| Skewed invoice | 223 | 223 | 18 | 23 |
+| Low-resolution letter | 25 | 30 | 25 | 30 |
+
+Entries are character edit counts. All runs used the same input bytes,
+English and Indonesian language data, and the same Linux container. These
+are diagnostic runs on three selected cases. The original 14.64% aggregate
+CER remains specific to PSM 1 with its original thresholding settings. A
+full-suite aggregate for a tuned Tesseract pipeline remains to be measured.
+
+The Rust prototype's 0.13% CER describes the RustO and pretrained PaddleOCR
+pipeline on this synthetic suite. The evidence supports that measured
+configuration comparison. A general accuracy advantage over Tesseract
+requires broader validation.
+[Raw diagnostic output and commands](benchmarks/tesseract-settings-audit.jsonl) ·
+[Tesseract image-quality guidance](https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html)
