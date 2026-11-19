@@ -177,7 +177,9 @@ requires broader validation.
 The compact CLI passed the offline rotated-memo smoke test in a Linux ARM64
 container restricted to two CPUs and 2 GiB memory, with networking disabled.
 The complete 12-page compact batch finished in 28.59 seconds, with a 0.81-second
-median per-page latency and seven character edits (0.22% CER).
+median per-page latency and seven character edits (0.22% CER). The first
+page took 10.63 seconds and the low-resolution scan took 7.43 seconds, so
+first-request and image-dependent latency still need profiling.
 [Linux measurements and transcripts](benchmarks/cpu-compact-linux-arm64.json)
 
 This completes the compact batch within the previous 300-second harness
