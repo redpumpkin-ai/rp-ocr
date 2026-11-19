@@ -11,6 +11,11 @@ reading order, confidence scores, and line polygons. The first release
 targets printed Latin-script documents, with English and Indonesian in the
 benchmark. Use rasterized pages for PDF input.
 
+The [matched CPU comparison with Tesseract](benchmarks/COMPARISON.md) records
+three native trials on the same Mac. Configured Tesseract matched compact's
+0.22% CER and had a lower observed median batch time. The report includes the
+large timing ranges, footprints, preprocessing settings, and raw transcripts.
+
 ## CPU profiles
 
 Choose `--profile balanced` or `--profile compact`. Both profiles run local CPU
