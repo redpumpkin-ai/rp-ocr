@@ -11,10 +11,56 @@ reading order, confidence scores, and line polygons. The first release
 targets printed Latin-script documents, with English and Indonesian in the
 benchmark. Use rasterized pages for PDF input.
 
+## CPU profiles
+
+Choose `--profile balanced` or `--profile compact`. Both profiles run local CPU
+inference and include page orientation correction. Balanced is the default.
+Compact uses half-precision detection and recognition weight files and limits
+the detector image's longest side to 640 pixels. The recognizer still reads
+crops from the source image.
+
+```sh
+target/release/rp-ocr --profile compact prepare
+target/release/rp-ocr --profile compact scan --json scan.png
+```
+
+For a standalone compact deployment, package `det-compact.mnn`,
+`rec-compact.mnn`, `dict.txt`, and `orient.rten` with the binary. These models
+total 9.46 MiB. The balanced models total 12.49 MiB. The macOS ARM64 binary
+is 3.33 MiB, giving installed totals of 12.80 MiB and 15.83 MiB respectively.
+
+A fresh sequential run of all 12 synthetic scans per profile used two RustO
+CPU threads on macOS ARM64. One engine instance served all pages. Model
+verification and loading were measured separately from per-page latency.
+
+| Measurement | Balanced | Compact |
+| --- | ---: | ---: |
+| Model verification and loading | 125 ms | 133 ms |
+| Median page latency | 1.92 s | 1.25 s |
+| Complete 12-page batch | 25.01 s | 16.61 s |
+| Peak process resident memory | 232.3 MiB | 119.9 MiB |
+| Character edits / 3,184 characters | 4 | 7 |
+| Character error rate | 0.13% | 0.22% |
+
+Compact reduced median latency by about 35% and measured peak memory by
+about 48% in this run. The resolution limit changes the accuracy tradeoff.
+The compact errors in this suite were on the faded and shadowed scans.
+These are single-pass measurements on a small synthetic set. Earlier batch
+latency varied across runs.
+[Full per-page measurements and transcripts](benchmarks/cpu-profiles-macos-arm64.json)
+
+Reproduce per-page measurements through the public library entry point.
+
+```sh
+cargo build --release --locked --example cpu_latency
+RUSTO_NUM_THREADS=2 target/release/examples/cpu_latency --profile compact \
+  benchmarks/fixtures/*.png benchmarks/fixtures/*.jpg
+```
+
 ## Run
 
-Build with Rust 1.96.1 and Cargo. Model setup uses `curl` to download about
-14 MB of weights and verifies each file by SHA-256. Run `prepare` on a
+Build with Rust 1.96.1 and Cargo. Model setup uses `curl` to download the
+selected weights and verifies each file by SHA-256. Run `prepare` on a
 connected machine, then copy the verified model directory alongside the
 binary for offline use. Scanning only uses local files.
 
@@ -47,7 +93,8 @@ fn main() -> anyhow::Result<()> {
 }
 ```
 
-Use `scan_rgb` for an in-memory `image::RgbImage`.
+Use `scan_rgb` for an in-memory `image::RgbImage`. Select compact inference
+with `Engine::open_profile(Path::new("models"), rp_ocr::Profile::Compact)`.
 
 ## Verification
 
@@ -124,3 +171,15 @@ configuration comparison. A general accuracy advantage over Tesseract
 requires broader validation.
 [Raw diagnostic output and commands](benchmarks/tesseract-settings-audit.jsonl) ·
 [Tesseract image-quality guidance](https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html)
+
+### Compact Linux verification
+
+The compact CLI passed the offline rotated-memo smoke test in a Linux ARM64
+container restricted to two CPUs and 2 GiB memory, with networking disabled.
+The complete 12-page compact batch finished in 28.59 seconds, with a 0.81-second
+median per-page latency and seven character edits (0.22% CER).
+[Linux measurements and transcripts](benchmarks/cpu-compact-linux-arm64.json)
+
+This completes the compact batch within the previous 300-second harness
+limit. The original balanced Linux timeout still requires its own cause
+analysis. The measurements above cover the compact profile.
