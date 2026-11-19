@@ -10,7 +10,7 @@ fn reads_a_sideways_memo_in_order_with_source_coordinates() -> anyhow::Result<()
     let fixture = root.join("benchmarks/fixtures/rotated-90.png");
     let reference = fs::read_to_string(fixture.with_extension("txt"))?;
 
-    for profile in [Profile::Balanced, Profile::Compact] {
+    for profile in [Profile::Balanced, Profile::Fast, Profile::Compact] {
         let mut engine = Engine::open_profile(&root.join("models"), profile)?;
         let page = engine.scan_file(&fixture)?;
 

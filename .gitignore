@@ -2,3 +2,4 @@
 /target/
 /target-linux/
 /.venv/
+__pycache__/

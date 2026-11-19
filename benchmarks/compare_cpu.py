@@ -22,7 +22,9 @@ FIXTURES = Path(__file__).resolve().parent / "fixtures"
 def worker(command):
     start = time.perf_counter()
     try:
-        completed = subprocess.run(command, capture_output=True, text=True, timeout=300)
+        completed = subprocess.run(
+            command, capture_output=True, text=True, timeout=300, check=False
+        )
         status = "ok" if completed.returncode == 0 else "error"
         text = completed.stdout
         stderr = completed.stderr
@@ -128,6 +130,7 @@ def main():
     parser.add_argument(
         "--rust-engine", type=Path, default=Path("target/release/rp-ocr")
     )
+    parser.add_argument("--baseline-collector", type=Path)
     parser.add_argument(
         "--tessdata", type=Path, default=Path("/usr/share/tesseract-ocr/5/tessdata")
     )
@@ -138,7 +141,9 @@ def main():
         nargs="+",
         choices=[
             "rust-balanced",
+            "rust-fast",
             "rust-compact",
+            "rust-baseline",
             "tesseract-otsu",
             "tesseract-sauvola",
             "tesseract-document",
@@ -159,6 +164,7 @@ def main():
         "OMP_THREAD_LIMIT": str(args.threads),
         "OMP_NUM_THREADS": str(args.threads),
         "RUSTO_NUM_THREADS": str(args.threads),
+        "RTEN_NUM_THREADS": str(args.threads),
         "RAYON_NUM_THREADS": str(args.threads),
         "TESSDATA_PREFIX": str(args.tessdata),
     }
@@ -177,7 +183,7 @@ def main():
                 profile,
                 *map(str, images),
             ]
-            for profile in ("balanced", "compact")
+            for profile in ("balanced", "fast", "compact")
         },
         **{
             f"tesseract-{preset}": [
@@ -191,7 +197,16 @@ def main():
             for preset in ("otsu", "sauvola", "document", "document-contrast")
         },
     }
+    if args.baseline_collector:
+        commands["rust-baseline"] = [
+            str(args.baseline_collector.resolve()),
+            "--profile",
+            "balanced",
+            *map(str, images),
+        ]
     if args.engines:
+        if "rust-baseline" in args.engines and not args.baseline_collector:
+            parser.error("rust-baseline requires --baseline-collector")
         commands = {name: commands[name] for name in args.engines}
     names = list(commands)
     rng = random.Random(20261119)
@@ -226,13 +241,50 @@ def main():
                 "orient.rten",
             )
         ],
+        "rust-fast": [
+            Path("models") / name
+            for name in (
+                "det.rten",
+                "rec-latin.rten",
+                "dict-latin.txt",
+                "orient.rten",
+            )
+        ],
         "tesseract": [
             args.tessdata / (name + ".traineddata") for name in ("eng", "ind", "osd")
         ],
     }
+    required_models = {
+        "rust-balanced"
+        if name == "rust-baseline"
+        else "tesseract"
+        if name.startswith("tesseract-")
+        else name
+        for name in commands
+    }
+    model_files = {
+        name: files for name, files in model_files.items() if name in required_models
+    }
     report = {
         "system": platform.system(),
         "machine": platform.machine(),
+        "rust_compiler": subprocess.check_output(
+            ["rustc", "--version"], text=True
+        ).strip(),
+        "source_sha256": {
+            str(path): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in [
+                Path("Cargo.toml"),
+                Path("Cargo.lock"),
+                *sorted(Path("src").rglob("*.rs")),
+            ]
+        },
+        "fast_profile_settings": {
+            "recognizer": "INT8, 692 English/Indonesian/Latin classes",
+            "detector": "FP32",
+            "batch_size": 1,
+            "detector_resolution": "max 640 for white-border sparse pages >=640px; original otherwise",
+        },
         "thread_limit": args.threads,
         "trials_requested": args.trials,
         "execution_orders": orders,
@@ -272,6 +324,11 @@ def main():
         "rust_version": subprocess.check_output(
             [str(args.rust_engine.resolve()), "--version"], text=True
         ).strip(),
+        "collector_sha256": {
+            str(path): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in [args.rust_collector, args.baseline_collector]
+            if path is not None
+        },
         "tesseract_cli_version": subprocess.check_output(
             ["tesseract", "--version"], text=True
         ).splitlines()[0]

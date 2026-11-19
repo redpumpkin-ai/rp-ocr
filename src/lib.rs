@@ -6,6 +6,8 @@ use rusto_core::{InitializeConfig, Mat, OcrRunOptions, Orientation, RustO};
 use serde::Serialize;
 
 mod contrast;
+mod cpu;
+mod detection;
 pub mod models;
 
 /// Select the model precision and detector resolution for CPU inference.
@@ -14,6 +16,8 @@ pub mod models;
 pub enum Profile {
     #[default]
     Balanced,
+    /// Full-precision detection and integer English/Indonesian recognition.
+    Fast,
     Compact,
 }
 
@@ -48,6 +52,7 @@ impl Page {
 /// Reuse one CPU engine for a sequence of local images.
 pub struct Engine {
     ocr: RustO,
+    fast: bool,
 }
 
 impl Engine {
@@ -59,22 +64,45 @@ impl Engine {
     /// Load a selected CPU profile from a verified local model bundle.
     pub fn open_profile(model_dir: &Path, profile: Profile) -> Result<Self> {
         models::verify(model_dir, profile)?;
-        let (detector, recognizer) = match profile {
-            Profile::Balanced => ("det.rten", "rec.rten"),
-            Profile::Compact => ("det-compact.mnn", "rec-compact.mnn"),
+        let (detector, recognizer, dictionary) = match profile {
+            Profile::Balanced => ("det.rten", "rec.rten", "dict.txt"),
+            Profile::Fast => ("det.rten", "rec-latin.rten", "dict-latin.txt"),
+            Profile::Compact => ("det-compact.mnn", "rec-compact.mnn", "dict.txt"),
         };
         let mut config = InitializeConfig::ppv6(
             model_dir.join(detector),
             model_dir.join(recognizer),
-            model_dir.join("dict.txt"),
+            model_dir.join(dictionary),
         )
         .with_orientation(model_dir.join("orient.rten"));
         if matches!(profile, Profile::Compact) {
             config.det.limit_type = "max".to_string();
             config.det.limit_side_len = 640;
         }
-        let ocr = RustO::initialize(config).context("could not load the OCR models")?;
-        Ok(Self { ocr })
+        let ocr = if matches!(profile, Profile::Balanced | Profile::Fast) {
+            config.rec.rec_workers = Some(1);
+            let threads = std::env::var("RUSTO_NUM_THREADS")
+                .or_else(|_| std::env::var("RAYON_NUM_THREADS"))
+                .ok()
+                .and_then(|value| value.parse::<usize>().ok())
+                .filter(|&value| value > 0)
+                .unwrap_or(4);
+            let pool = std::sync::Arc::new(rten::ThreadPool::with_num_threads(threads));
+            let det = cpu::CpuSession::open(&config.det.model_path, pool.clone())?;
+            let rec = cpu::CpuSession::open(&config.rec.model_path, pool.clone())?;
+            let orient = cpu::CpuSession::open(&model_dir.join("orient.rten"), pool)?;
+            config.orient = None;
+            let mut ocr = RustO::with_custom_engines(config, det, rec)?;
+            ocr.pipeline.orient = Some(Box::new(orient));
+            Ok(ocr)
+        } else {
+            RustO::initialize(config)
+        }
+        .context("could not load the OCR models")?;
+        Ok(Self {
+            ocr,
+            fast: matches!(profile, Profile::Fast),
+        })
     }
 
     /// Read one JPEG or PNG, honoring its EXIF orientation and alpha channel.
@@ -89,11 +117,17 @@ impl Engine {
     pub fn scan_rgb(&mut self, mut image: RgbImage) -> Result<Page> {
         let (width, height) = image.dimensions();
         check_dimensions(width, height)?;
+        let detection = if self.fast {
+            detection::fast_options(&image)
+        } else {
+            None
+        };
         contrast::restore(&mut image);
 
-        let options = OcrRunOptions::default()
+        let mut options = OcrRunOptions::default()
             .with_orientation_detection(true)
             .with_layout_reading(true);
+        options.detection = detection;
         let input = Mat::from_rgb_stride(width, height, width as usize * 3, image.as_raw())?;
         let output = self.ocr.run_on_mat_with_options(&input, &options)?;
         let results = match output.orientation {

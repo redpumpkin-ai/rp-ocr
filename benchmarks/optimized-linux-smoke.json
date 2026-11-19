@@ -1,0 +1,82 @@
+{
+  "status": "infrastructure_timeout_unverified",
+  "purpose": "Attempted offline CPU-only Linux ARM64 smoke; no successful result may be inferred.",
+  "timeout_seconds": 300,
+  "ocr_events_received": 0,
+  "stderr": "docker run did not produce stdout/stderr before the 300-second client timeout.",
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--pull",
+    "never",
+    "--network",
+    "none",
+    "--cpus",
+    "2",
+    "--memory",
+    "2g",
+    "-e",
+    "RUSTO_NUM_THREADS=2",
+    "-e",
+    "RAYON_NUM_THREADS=2",
+    "-e",
+    "RTEN_NUM_THREADS=2",
+    "-v",
+    "/private/tmp/rp-ocr-build.f7STZ8:/work:ro",
+    "-v",
+    "/private/tmp/rp-ocr-prepare-check.zo84w0rp:/work/models:ro",
+    "-w",
+    "/work",
+    "--entrypoint",
+    "/work/target-linux/aarch64-unknown-linux-musl/release/examples/cpu_latency",
+    "redpumpkin/dms-processing:local",
+    "--profile",
+    "fast",
+    "benchmarks/fixtures/clean-letter.png",
+    "benchmarks/fixtures/clean-manifest.png",
+    "benchmarks/fixtures/clean-memo-id.png",
+    "benchmarks/fixtures/clean-receipt.png",
+    "benchmarks/fixtures/faded.jpg",
+    "benchmarks/fixtures/low-resolution.jpg",
+    "benchmarks/fixtures/rotated-180.png",
+    "benchmarks/fixtures/rotated-270.png",
+    "benchmarks/fixtures/rotated-90.png",
+    "benchmarks/fixtures/shadowed.jpg",
+    "benchmarks/fixtures/skewed.png",
+    "benchmarks/fixtures/two-columns.png"
+  ],
+  "infrastructure_probes": [
+    {
+      "probe": "Docker local socket GET /_ping",
+      "result": "OK"
+    },
+    {
+      "probe": "Docker local socket GET /containers/json?all=1",
+      "result": "curl code 28: timeout after 10048 ms, zero response bytes"
+    },
+    {
+      "probe": "docker ps filtered to benchmark image",
+      "result": "Did not respond promptly; later returned no output."
+    },
+    {
+      "probe": "docker version server",
+      "result": "29.6.1"
+    },
+    {
+      "probe": "docker image inspect redpumpkin/dms-processing:local",
+      "result": "15-second timeout"
+    }
+  ],
+  "interpretation": "Container control-plane calls also stall, so this attempt does not isolate OCR engine latency. Container creation/completion and the previous Linux batch-timeout cause remain unverified. Docker was not restarted.",
+  "build": "static aarch64-unknown-linux-musl, release, --strip-all",
+  "collector_sha256": "9282462483b2dbca0377a2a025e9abc89e5a61ff9b81d62f2732bf56a8f608d9",
+  "cli_sha256": "e2335a93f59a745689aaaf8478f6eb9bdebfb2bd08d0f93f86024fc99085ada3",
+  "cli_bytes": 5104296,
+  "runtime_model_sha256": {
+    "det.rten": "ca1f0196d2a2da2b485e2cda6aaf5ba02258ac71127d577c8a77a75e89b67605",
+    "rec-latin.rten": "6ff6e6544121c225b503f049136b7cdb23a813e26ab3c5e74c094a95f15c9ac4",
+    "dict-latin.txt": "0a4450f64631c386333cc0774edacd4b90b0c765c2fde376503349ee708f9aa9",
+    "orient.rten": "422fa370f05d871f7510b0b4aa453a98a9ed7f7d5284d0f7966bbe9602d82dfa"
+  }
+}

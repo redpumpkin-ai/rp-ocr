@@ -1,0 +1,1919 @@
+{
+  "system": "Darwin",
+  "machine": "arm64",
+  "rust_compiler": "rustc 1.96.1 (31fca3adb 2026-06-26)",
+  "source_sha256": {
+    "Cargo.toml": "2f9b79b82bb0fb2bf39d7f67851d4d0bfd36ae8b022baf3c44427f029660abec",
+    "Cargo.lock": "b7b122070bd3a67973c0528ecd6f8195ba2272ffd73225b7b700de82febcb3d5",
+    "src/contrast.rs": "c6a8ff3bb872dd0660eeaad806fa33b76eca980bf97c36fb90fee2afa5ab7394",
+    "src/cpu.rs": "329b0cf30d72a290ff1da2ed5fd968d7691bec1e9b11349ad410c8107f87aa8f",
+    "src/lib.rs": "656b515c0c83fbf8e5b7ad01030feb9723fafbfc09198291caf626b5deba7435",
+    "src/main.rs": "c427d32cfe078f91b4e186c2546568ff4bc8e7366043e33261c9ea168440c841",
+    "src/models.rs": "014af1102b6ab99606e11329e8a12424207630e19863f82c18d4712e43bc8d77"
+  },
+  "fast_profile_settings": {
+    "recognizer": "INT8",
+    "detector": "FP32",
+    "batch_size": 1,
+    "detector_resolution": "original balanced preset"
+  },
+  "thread_limit": 2,
+  "trials_requested": 3,
+  "execution_orders": [
+    [
+      "tesseract-document-contrast",
+      "rust-balanced",
+      "rust-fast"
+    ],
+    [
+      "tesseract-document-contrast",
+      "rust-fast",
+      "rust-balanced"
+    ],
+    [
+      "rust-balanced",
+      "rust-fast",
+      "tesseract-document-contrast"
+    ]
+  ],
+  "methodology": "Fresh process and one initialized engine per trial. Same ordered image bytes. Per-page time includes reading and preprocessing. Total batch includes process startup, model loading, and OCR. One fixed preset per run, without per-page oracle selection. These presets were developed on the same synthetic inputs. No GPU. Rust uses the public library through cpu_latency. Tesseract uses its C API through ctypes. Tesseract process RSS includes the Python ctypes driver. A failed or timed-out configuration is retained and skipped in later trials.",
+  "presets": {
+    "tesseract-document-contrast": "Document preset plus 0.5/99.5 percentile luminance stretching when the range spans 12..105 levels, using the contrast-restoration strategy of the Rust engine.",
+    "tesseract-otsu": "eng+ind, automatic orientation and segmentation (PSM 1), Otsu",
+    "tesseract-sauvola": "eng+ind, PSM 1, Sauvola (thresholding_method=2)",
+    "tesseract-document": "eng+ind, PSM 1, Sauvola. Before OCR, upscale images below 1000px on the longest side to 1000px, estimate and correct skew within +/-15 degrees using Leptonica with confidence >= 2 and angle magnitude >= 0.5 degrees, and set resolution to 300dpi. The identical rule is applied to every image and its time is included."
+  },
+  "model_bytes": {
+    "rust-balanced": 13101628,
+    "rust-fast": 11443636,
+    "tesseract": 15798476
+  },
+  "model_sha256": {
+    "models/det.rten": "ca1f0196d2a2da2b485e2cda6aaf5ba02258ac71127d577c8a77a75e89b67605",
+    "models/rec.rten": "6c94c6b42c43a39d11cf3dd1267199ba04a11afe9de43632daa6f3983b365a9b",
+    "models/dict.txt": "c5cbe34ef40c29c4df07ed012bf96569cb69a2d2a01a07027e9f13cb832bd9cd",
+    "models/orient.rten": "422fa370f05d871f7510b0b4aa453a98a9ed7f7d5284d0f7966bbe9602d82dfa",
+    "models/rec-int8.rten": "6c8db072d7606054a9682194eb2db581eccb8490099382d63a0af67dc80b9499",
+    "models/tessdata/eng.traineddata": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "models/tessdata/ind.traineddata": "69786901da87ab8766c1ea7fbb10b28f2110c14da3f6c8f2735df131fba95d88",
+    "models/tessdata/osd.traineddata": "9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff"
+  },
+  "input_sha256": {
+    "clean-letter.png": "73b59d5d1e9b3be8d0f584e11d6b4dfae252e078f7b146abb091aee155138922",
+    "clean-manifest.png": "e8af4cd0254ff21fb27e3505d702a522907f0f29f5205fce9d3dd75031e53ea1",
+    "clean-memo-id.png": "53f3ea2ef50710317085be87d581d34b8bba1d06c83953035c8d291ab10aae61",
+    "clean-receipt.png": "1324ea50f1d477475189ec40802fbdb71fe49587c2e3ecfb658471a0d08c6b05",
+    "faded.jpg": "dc99c4f737e67b15e46dc335e7d09aed98c67acc8af115215b27cc3cb7e1d5e2",
+    "low-resolution.jpg": "ea43f839a44887c7447741e7304c03e47c460813384c824f419cf7664ff4c9e8",
+    "rotated-180.png": "d51d6671045b536de0980eb880d024411d756525c6d89532b241c5cef3a89c88",
+    "rotated-270.png": "3991c5717b95b46949558e70b4b4f8eb33ef205f6f1373e0705d2ee390c2969b",
+    "rotated-90.png": "84b4da2494b8ea531583011ba79489c8ab03d2cdfbfe7e3362a4b1f9818202aa",
+    "shadowed.jpg": "80542abb65d6281a63b0684f49dab6c9de59bbea29a2b75ae56f14a4cb3bebb9",
+    "skewed.png": "916da07bc83bb682083126d54519337e76cfcf9e4772397b9e23280c984768c2",
+    "two-columns.png": "fede4e6e43476d18890805e3976e761233d04eecfff9c3afa4ea7339245589a4"
+  },
+  "tesseract_library": ".venv/lib/python3.12/site-packages/tesserocr/.dylibs/libtesseract.5.5.4.dylib",
+  "leptonica_library": ".venv/lib/python3.12/site-packages/tesserocr/.dylibs/libleptonica.6.0.0.dylib",
+  "rust_version": "rp-ocr 0.1.0",
+  "collector_sha256": {
+    "target/release/examples/cpu_latency": "8ddd4d8eb7be583d6fd6fdf79e1aa8a4e52e17f44998338a33055651de000999"
+  },
+  "tesseract_cli_version": null,
+  "summary": {
+    "rust-balanced": {
+      "completed_trials": 3,
+      "failures": 0,
+      "median_batch_seconds": 13.901474624988623,
+      "batch_seconds": [
+        13.6833453750005,
+        14.020713958016131,
+        13.901474624988623
+      ],
+      "median_page_ms": 1136.913916,
+      "p95_page_ms": 1437.3986245,
+      "median_first_page_ms": 1399.382209,
+      "median_model_load_ms": 155.793666,
+      "median_peak_rss_bytes": 255852544,
+      "cer": 0.001256281407035176,
+      "character_edits_per_trial": [
+        4,
+        4,
+        4
+      ],
+      "reference_characters_per_trial": 3184
+    },
+    "rust-fast": {
+      "completed_trials": 3,
+      "failures": 0,
+      "median_batch_seconds": 14.452376959001413,
+      "batch_seconds": [
+        12.705590750003466,
+        15.063662375003332,
+        14.452376959001413
+      ],
+      "median_page_ms": 1139.511771,
+      "p95_page_ms": 1543.505552,
+      "median_first_page_ms": 1141.0230000000001,
+      "median_model_load_ms": 121.453542,
+      "median_peak_rss_bytes": 235143168,
+      "cer": 0.0009422110552763819,
+      "character_edits_per_trial": [
+        3,
+        3,
+        3
+      ],
+      "reference_characters_per_trial": 3184
+    },
+    "tesseract-document-contrast": {
+      "completed_trials": 3,
+      "failures": 0,
+      "median_batch_seconds": 6.408776750002289,
+      "batch_seconds": [
+        6.213814042013837,
+        6.683673207997344,
+        6.408776750002289
+      ],
+      "median_page_ms": 478.95854151283856,
+      "p95_page_ms": 793.7023432532442,
+      "median_first_page_ms": 603.0511659919284,
+      "median_model_load_ms": 213.31020799698308,
+      "median_peak_rss_bytes": 153976832,
+      "cer": 0.0021984924623115578,
+      "character_edits_per_trial": [
+        7,
+        7,
+        7
+      ],
+      "reference_characters_per_trial": 3184
+    }
+  },
+  "runs": {
+    "rust-balanced": [
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 13.6833453750005,
+        "peak_rss_bytes": 247857152,
+        "user_cpu_seconds": 13.447681,
+        "system_cpu_seconds": 0.381743,
+        "stderr": "",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/target/release/examples/cpu_latency",
+          "--profile",
+          "balanced",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 155.793666,
+          "profile": "balanced",
+          "threads": "2"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "lines": 8,
+            "milliseconds": 1399.382209,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "lines": 9,
+            "milliseconds": 1401.356375,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "lines": 7,
+            "milliseconds": 858.350333,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "lines": 9,
+            "milliseconds": 881.7946250000001,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "lines": 9,
+            "milliseconds": 1079.005916,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 3,
+            "word_edits": 3
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "lines": 8,
+            "milliseconds": 1198.161833,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "lines": 9,
+            "milliseconds": 978.0495,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "lines": 9,
+            "milliseconds": 919.264334,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "lines": 7,
+            "milliseconds": 1256.7471249999999,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "lines": 9,
+            "milliseconds": 1239.417083,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "lines": 9,
+            "milliseconds": 1127.8087910000002,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 1,
+            "word_edits": 2
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "lines": 10,
+            "milliseconds": 1166.51225,
+            "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 14.020713958016131,
+        "peak_rss_bytes": 256786432,
+        "user_cpu_seconds": 13.119002,
+        "system_cpu_seconds": 0.328637,
+        "stderr": "",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/target/release/examples/cpu_latency",
+          "--profile",
+          "balanced",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 235.112291,
+          "profile": "balanced",
+          "threads": "2"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "lines": 8,
+            "milliseconds": 1731.765875,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "lines": 9,
+            "milliseconds": 1061.753792,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "lines": 7,
+            "milliseconds": 1124.3032500000002,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "lines": 9,
+            "milliseconds": 1408.702708,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "lines": 9,
+            "milliseconds": 984.933125,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 3,
+            "word_edits": 3
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "lines": 8,
+            "milliseconds": 957.6721249999999,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "lines": 9,
+            "milliseconds": 637.405625,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "lines": 9,
+            "milliseconds": 1214.135625,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "lines": 7,
+            "milliseconds": 1166.4921669999999,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "lines": 9,
+            "milliseconds": 1200.9405,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "lines": 9,
+            "milliseconds": 1194.468417,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 1,
+            "word_edits": 2
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "lines": 10,
+            "milliseconds": 1070.084333,
+            "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 13.901474624988623,
+        "peak_rss_bytes": 255852544,
+        "user_cpu_seconds": 13.249672,
+        "system_cpu_seconds": 0.306933,
+        "stderr": "",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/target/release/examples/cpu_latency",
+          "--profile",
+          "balanced",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 121.833,
+          "profile": "balanced",
+          "threads": "2"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "lines": 8,
+            "milliseconds": 979.373792,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "lines": 9,
+            "milliseconds": 1425.794416,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "lines": 7,
+            "milliseconds": 1163.747292,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "lines": 9,
+            "milliseconds": 978.991,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "lines": 9,
+            "milliseconds": 1193.34175,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 3,
+            "word_edits": 3
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "lines": 8,
+            "milliseconds": 1255.039292,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "lines": 9,
+            "milliseconds": 945.630958,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "lines": 9,
+            "milliseconds": 1116.2820840000002,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "lines": 7,
+            "milliseconds": 1097.472833,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "lines": 9,
+            "milliseconds": 1146.019041,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "lines": 9,
+            "milliseconds": 986.415375,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 1,
+            "word_edits": 2
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "lines": 10,
+            "milliseconds": 1472.21125,
+            "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      }
+    ],
+    "rust-fast": [
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 12.705590750003466,
+        "peak_rss_bytes": 235143168,
+        "user_cpu_seconds": 12.274923,
+        "system_cpu_seconds": 0.288966,
+        "stderr": "",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/target/release/examples/cpu_latency",
+          "--profile",
+          "fast",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 121.453542,
+          "profile": "fast",
+          "threads": "2"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "lines": 8,
+            "milliseconds": 871.75275,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "lines": 9,
+            "milliseconds": 899.283292,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "lines": 7,
+            "milliseconds": 1103.5285,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "lines": 9,
+            "milliseconds": 1289.653291,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "lines": 9,
+            "milliseconds": 1537.4239159999997,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 3,
+            "word_edits": 3
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "lines": 8,
+            "milliseconds": 1398.750541,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "lines": 9,
+            "milliseconds": 1084.960875,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "lines": 9,
+            "milliseconds": 1093.210083,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "lines": 7,
+            "milliseconds": 786.960584,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "lines": 9,
+            "milliseconds": 704.025583,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "lines": 9,
+            "milliseconds": 988.545125,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "lines": 10,
+            "milliseconds": 804.1084579999999,
+            "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 15.063662375003332,
+        "peak_rss_bytes": 235814912,
+        "user_cpu_seconds": 14.095744,
+        "system_cpu_seconds": 0.415939,
+        "stderr": "",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/target/release/examples/cpu_latency",
+          "--profile",
+          "fast",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 235.678458,
+          "profile": "fast",
+          "threads": "2"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "lines": 8,
+            "milliseconds": 1141.0230000000001,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "lines": 9,
+            "milliseconds": 1387.3065419999998,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "lines": 7,
+            "milliseconds": 1031.029125,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "lines": 9,
+            "milliseconds": 1239.551625,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "lines": 9,
+            "milliseconds": 1138.000542,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 3,
+            "word_edits": 3
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "lines": 8,
+            "milliseconds": 1391.386375,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "lines": 9,
+            "milliseconds": 1538.648875,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "lines": 9,
+            "milliseconds": 1001.237167,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "lines": 7,
+            "milliseconds": 1361.2232079999999,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "lines": 9,
+            "milliseconds": 1282.8038749999998,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "lines": 9,
+            "milliseconds": 1290.041666,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "lines": 10,
+            "milliseconds": 1004.099334,
+            "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 14.452376959001413,
+        "peak_rss_bytes": 221790208,
+        "user_cpu_seconds": 13.519583,
+        "system_cpu_seconds": 0.34921399999999997,
+        "stderr": "",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/target/release/examples/cpu_latency",
+          "--profile",
+          "fast",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 113.959542,
+          "profile": "fast",
+          "threads": "2"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "lines": 8,
+            "milliseconds": 1188.211041,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "lines": 9,
+            "milliseconds": 1250.1964169999999,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "lines": 7,
+            "milliseconds": 1230.2141669999999,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "lines": 9,
+            "milliseconds": 926.077916,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "lines": 9,
+            "milliseconds": 1016.8642080000001,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 3,
+            "word_edits": 3
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "lines": 8,
+            "milliseconds": 1016.778792,
+            "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "lines": 9,
+            "milliseconds": 1373.276459,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "lines": 9,
+            "milliseconds": 1230.67725,
+            "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "lines": 7,
+            "milliseconds": 1558.0755829999998,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "lines": 9,
+            "milliseconds": 1585.529875,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "lines": 9,
+            "milliseconds": 1013.6639999999999,
+            "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "lines": 10,
+            "milliseconds": 925.9019579999999,
+            "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      }
+    ],
+    "tesseract-document-contrast": [
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 6.213814042013837,
+        "peak_rss_bytes": 143998976,
+        "user_cpu_seconds": 5.420989,
+        "system_cpu_seconds": 0.141207,
+        "stderr": "OSD: Weak margin (2.51) for 104 blob text block, but using orientation anyway: 0\n",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/bin/python",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/tesseract_api_latency.py",
+          "--preset",
+          "document-contrast",
+          "--tesseract-library",
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/lib/python3.12/site-packages/tesserocr/.dylibs/libtesseract.5.5.4.dylib",
+          "--leptonica-library",
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/lib/python3.12/site-packages/tesserocr/.dylibs/libleptonica.6.0.0.dylib",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 300.9139579953626,
+          "version": "5.5.4",
+          "preset": "document-contrast"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "milliseconds": 614.519750000909,
+            "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\n\nReference: FIN-2026-0481\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 5.12694787979126,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "milliseconds": 473.55458297533914,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.593278169631958,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "milliseconds": 771.4522919850424,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 6.147267818450928,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "milliseconds": 360.4884159867652,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.1705570220947266,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "milliseconds": 456.4828750153538,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nRetum copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.48008394241333,
+              "contrast_stretched": true,
+              "dark_level": 188,
+              "light_level": 232
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 2,
+            "word_edits": 1
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "milliseconds": 503.00150000839494,
+            "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday\nThe current report lists 208 cleared items and 14 open items\nKeep the onginal receipts with the supporting documents,\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "preprocessing": {
+              "scale": 2.7777777777777777,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 4.514075756072998,
+              "contrast_stretched": false,
+              "dark_level": 26,
+              "light_level": 255
+            },
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 5,
+            "word_edits": 4
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "milliseconds": 391.4062090043444,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.046875,
+              "deskew_confidence": 3.7549030780792236,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "milliseconds": 340.1009579829406,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\n\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": 0.109375,
+              "deskew_confidence": 1.8788707256317139,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "milliseconds": 483.2549170241691,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.109375,
+              "deskew_confidence": 1.4526232481002808,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "milliseconds": 463.6537079932168,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 2.385925769805908,
+              "contrast_stretched": false,
+              "dark_level": 43,
+              "light_level": 239
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "milliseconds": 486.63883400149643,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": 9.0625,
+              "deskew_confidence": 2.289175033569336,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "milliseconds": 453.4635840100236,
+            "text": "The western warehouse\n\nholds the replacement parts.\n\nShip four cartons to the\nservice team on Monday.\n\nFile the dispatch slip.\n\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\n\nconfirm the final count.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 6.581605911254883,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 6.683673207997344,
+        "peak_rss_bytes": 153976832,
+        "user_cpu_seconds": 5.609142,
+        "system_cpu_seconds": 0.147869,
+        "stderr": "OSD: Weak margin (2.51) for 104 blob text block, but using orientation anyway: 0\n",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/bin/python",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/tesseract_api_latency.py",
+          "--preset",
+          "document-contrast",
+          "--tesseract-library",
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/lib/python3.12/site-packages/tesserocr/.dylibs/libtesseract.5.5.4.dylib",
+          "--leptonica-library",
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/lib/python3.12/site-packages/tesserocr/.dylibs/libleptonica.6.0.0.dylib",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 213.31020799698308,
+          "version": "5.5.4",
+          "preset": "document-contrast"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "milliseconds": 571.6318750055507,
+            "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\n\nReference: FIN-2026-0481\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 5.12694787979126,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "milliseconds": 341.07254102127627,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.593278169631958,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "milliseconds": 503.4598750062287,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 6.147267818450928,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "milliseconds": 351.0926669987384,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.1705570220947266,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "milliseconds": 633.1215410027653,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nRetum copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.48008394241333,
+              "contrast_stretched": true,
+              "dark_level": 188,
+              "light_level": 232
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 2,
+            "word_edits": 1
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "milliseconds": 916.2442910019308,
+            "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday\nThe current report lists 208 cleared items and 14 open items\nKeep the onginal receipts with the supporting documents,\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "preprocessing": {
+              "scale": 2.7777777777777777,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 4.514075756072998,
+              "contrast_stretched": false,
+              "dark_level": 26,
+              "light_level": 255
+            },
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 5,
+            "word_edits": 4
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "milliseconds": 833.6257499759085,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.046875,
+              "deskew_confidence": 3.7549030780792236,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "milliseconds": 397.47258301940747,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\n\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": 0.109375,
+              "deskew_confidence": 1.8788707256317139,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "milliseconds": 513.2707909797318,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.109375,
+              "deskew_confidence": 1.4526232481002808,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "milliseconds": 409.8505000001751,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 2.385925769805908,
+              "contrast_stretched": false,
+              "dark_level": 43,
+              "light_level": 239
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "milliseconds": 474.662166001508,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": 9.0625,
+              "deskew_confidence": 2.289175033569336,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "milliseconds": 394.6326669829432,
+            "text": "The western warehouse\n\nholds the replacement parts.\n\nShip four cartons to the\nservice team on Monday.\n\nFile the dispatch slip.\n\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\n\nconfirm the final count.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 6.581605911254883,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "returncode": 0,
+        "total_seconds": 6.408776750002289,
+        "peak_rss_bytes": 154140672,
+        "user_cpu_seconds": 5.253494,
+        "system_cpu_seconds": 0.124859,
+        "stderr": "OSD: Weak margin (2.51) for 104 blob text block, but using orientation anyway: 0\n",
+        "command": [
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/bin/python",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/tesseract_api_latency.py",
+          "--preset",
+          "document-contrast",
+          "--tesseract-library",
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/lib/python3.12/site-packages/tesserocr/.dylibs/libtesseract.5.5.4.dylib",
+          "--leptonica-library",
+          "/private/tmp/rp-ocr-build.f7STZ8/.venv/lib/python3.12/site-packages/tesserocr/.dylibs/libleptonica.6.0.0.dylib",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+          "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png"
+        ],
+        "model_load": {
+          "event": "model_load",
+          "milliseconds": 137.1796669845935,
+          "version": "5.5.4",
+          "preset": "document-contrast"
+        },
+        "pages": [
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+            "milliseconds": 603.0511659919284,
+            "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\n\nReference: FIN-2026-0481\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 5.12694787979126,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+            "milliseconds": 578.2175830099732,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.593278169631958,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+            "milliseconds": 630.3720000141766,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 6.147267818450928,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+            "milliseconds": 402.1092090115417,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.1705570220947266,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+            "milliseconds": 455.3449999948498,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nRetum copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 3.48008394241333,
+              "contrast_stretched": true,
+              "dark_level": 188,
+              "light_level": 232
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 2,
+            "word_edits": 1
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+            "milliseconds": 552.4786669993773,
+            "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday\nThe current report lists 208 cleared items and 14 open items\nKeep the onginal receipts with the supporting documents,\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "preprocessing": {
+              "scale": 2.7777777777777777,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 4.514075756072998,
+              "contrast_stretched": false,
+              "dark_level": 26,
+              "light_level": 255
+            },
+            "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+            "reference_characters": 333,
+            "character_edits": 5,
+            "word_edits": 4
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+            "milliseconds": 406.1316250008531,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.046875,
+              "deskew_confidence": 3.7549030780792236,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+            "milliseconds": 494.3124999990687,
+            "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\n\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": 0.109375,
+              "deskew_confidence": 1.8788707256317139,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+            "reference_characters": 237,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+            "milliseconds": 780.3945410123561,
+            "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.109375,
+              "deskew_confidence": 1.4526232481002808,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+            "reference_characters": 326,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+            "milliseconds": 496.09900001087226,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.09375,
+              "deskew_confidence": 2.385925769805908,
+              "contrast_stretched": false,
+              "dark_level": 43,
+              "light_level": 239
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+            "milliseconds": 383.596583007602,
+            "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": 9.0625,
+              "deskew_confidence": 2.289175033569336,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+            "reference_characters": 223,
+            "character_edits": 0,
+            "word_edits": 0
+          },
+          {
+            "event": "page",
+            "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+            "milliseconds": 394.62050001020543,
+            "text": "The western warehouse\n\nholds the replacement parts.\n\nShip four cartons to the\nservice team on Monday.\n\nFile the dispatch slip.\n\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\n\nconfirm the final count.\n",
+            "preprocessing": {
+              "scale": 1.0,
+              "deskew_angle_degrees": -0.0625,
+              "deskew_confidence": 6.581605911254883,
+              "contrast_stretched": false,
+              "dark_level": 0,
+              "light_level": 255
+            },
+            "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+            "reference_characters": 249,
+            "character_edits": 0,
+            "word_edits": 0
+          }
+        ]
+      }
+    ]
+  }
+}

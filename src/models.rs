@@ -8,6 +8,8 @@ use sha2::{Digest, Sha256};
 
 use crate::Profile;
 
+mod latin;
+
 const SOURCE: &str =
     "https://huggingface.co/byrizki/rusto-models/resolve/34812c324fa258436fbcf1959eaf4ace7af6e5d4";
 
@@ -56,9 +58,31 @@ const COMPACT_ASSETS: [Asset; 4] = [
     ASSETS[3],
 ];
 
+const INT8_READER: Asset = Asset {
+    upstream: "ppocrv6-tiny-int8/rec.rten",
+    filename: "rec-int8.rten",
+    sha256: "6c8db072d7606054a9682194eb2db581eccb8490099382d63a0af67dc80b9499",
+};
+
+const FAST_ASSETS: [Asset; 4] = [
+    ASSETS[0],
+    Asset {
+        upstream: "", // Derived locally from INT8_READER.
+        filename: "rec-latin.rten",
+        sha256: "6ff6e6544121c225b503f049136b7cdb23a813e26ab3c5e74c094a95f15c9ac4",
+    },
+    Asset {
+        upstream: "", // Derived locally from ASSETS[2].
+        filename: "dict-latin.txt",
+        sha256: "0a4450f64631c386333cc0774edacd4b90b0c765c2fde376503349ee708f9aa9",
+    },
+    ASSETS[3],
+];
+
 fn assets(profile: Profile) -> &'static [Asset] {
     match profile {
         Profile::Balanced => &ASSETS,
+        Profile::Fast => &FAST_ASSETS,
         Profile::Compact => &COMPACT_ASSETS,
     }
 }
@@ -71,48 +95,84 @@ pub fn prepare(directory: &Path) -> Result<()> {
 /// Download and verify the models required by the selected CPU profile.
 pub fn prepare_profile(directory: &Path, profile: Profile) -> Result<()> {
     fs::create_dir_all(directory)?;
-    for asset in assets(profile) {
-        let destination = directory.join(asset.filename);
-        if matches_digest(&destination, asset.sha256)? {
-            continue;
-        }
-
-        let staged = directory.join(format!(".{}.{}.part", asset.filename, std::process::id()));
-        let download = || -> Result<()> {
-            let url = format!("{SOURCE}/{}?download=true", asset.upstream);
-            let status = Command::new("curl")
-                .args([
-                    "--fail",
-                    "--silent",
-                    "--show-error",
-                    "--location",
-                    "--retry",
-                    "3",
-                    "--retry-all-errors",
-                    "--connect-timeout",
-                    "10",
-                    "--max-time",
-                    "90",
-                    "--output",
-                ])
-                .arg(&staged)
-                .arg(url)
-                .status()
-                .context("install curl to download OCR models")?;
-            ensure!(status.success(), "download failed for {}", asset.filename);
+    for asset in assets(profile)
+        .iter()
+        .filter(|asset| !asset.upstream.is_empty())
+    {
+        prepare_asset(directory, asset)?;
+    }
+    if matches!(profile, Profile::Fast)
+        && (!matches_digest(
+            &directory.join(FAST_ASSETS[1].filename),
+            FAST_ASSETS[1].sha256,
+        )? || !matches_digest(
+            &directory.join(FAST_ASSETS[2].filename),
+            FAST_ASSETS[2].sha256,
+        )?)
+    {
+        prepare_asset(directory, &INT8_READER)?;
+        prepare_asset(directory, &ASSETS[2])?;
+        let (reader, dictionary) = latin::derive(
+            &fs::read(directory.join(INT8_READER.filename))?,
+            &fs::read_to_string(directory.join(ASSETS[2].filename))?,
+        )?;
+        for (asset, data) in [
+            (FAST_ASSETS[1], reader.as_slice()),
+            (FAST_ASSETS[2], dictionary.as_bytes()),
+        ] {
             ensure!(
-                matches_digest(&staged, asset.sha256)?,
-                "SHA-256 mismatch for {}",
-                asset.filename
+                format!("{:x}", Sha256::digest(data)) == asset.sha256,
+                "derived model SHA-256 mismatch"
             );
-            fs::rename(&staged, &destination)?;
-            Ok(())
-        };
-
-        if let Err(error) = download() {
-            let _ = fs::remove_file(&staged);
-            return Err(error);
+            let staged = directory.join(format!(".{}.{}.part", asset.filename, std::process::id()));
+            fs::write(&staged, data)?;
+            fs::rename(staged, directory.join(asset.filename))?;
         }
+    }
+    verify(directory, profile)
+}
+
+fn prepare_asset(directory: &Path, asset: &Asset) -> Result<()> {
+    let destination = directory.join(asset.filename);
+    if matches_digest(&destination, asset.sha256)? {
+        return Ok(());
+    }
+
+    let staged = directory.join(format!(".{}.{}.part", asset.filename, std::process::id()));
+    let download = || -> Result<()> {
+        let url = format!("{SOURCE}/{}?download=true", asset.upstream);
+        let status = Command::new("curl")
+            .args([
+                "--fail",
+                "--silent",
+                "--show-error",
+                "--location",
+                "--retry",
+                "3",
+                "--retry-all-errors",
+                "--connect-timeout",
+                "10",
+                "--max-time",
+                "90",
+                "--output",
+            ])
+            .arg(&staged)
+            .arg(url)
+            .status()
+            .context("install curl to download OCR models")?;
+        ensure!(status.success(), "download failed for {}", asset.filename);
+        ensure!(
+            matches_digest(&staged, asset.sha256)?,
+            "SHA-256 mismatch for {}",
+            asset.filename
+        );
+        fs::rename(&staged, &destination)?;
+        Ok(())
+    };
+
+    if let Err(error) = download() {
+        let _ = fs::remove_file(&staged);
+        return Err(error);
     }
     Ok(())
 }
@@ -120,6 +180,7 @@ pub fn prepare_profile(directory: &Path, profile: Profile) -> Result<()> {
 pub(crate) fn verify(directory: &Path, profile: Profile) -> Result<()> {
     let profile_name = match profile {
         Profile::Balanced => "balanced",
+        Profile::Fast => "fast",
         Profile::Compact => "compact",
     };
     for asset in assets(profile) {

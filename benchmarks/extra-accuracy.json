@@ -1,0 +1,162 @@
+{
+  "purpose": "Accuracy validation on six additional synthetic images, including dense text, serif/monospace fonts, a footer and rotation. Not a latency benchmark.",
+  "input_sha256": {
+    "agreement-rotated.png": "a47a0a2f8a51099f58069db83e123003d5dd82caa3796e5f81c943436579d503",
+    "agreement.png": "06b32ef537d9ee7db8a38ba65e33b5e1d086532ff8a20d3f1da2392d74909f6e",
+    "asset-register-rotated.png": "3be505b091554892191d537e8fcf3b0d8c461517c197ad4d1802d06ab09cf0f8",
+    "asset-register.png": "05d97ef9b46eb67ae1bb7b6ec945fca0ad7da2fbb6af375087b2848543325d87",
+    "purchase-order-rotated.png": "ce16394fab522bf2649c08cc79a7be9b891b84d71f860ad03b280625fc9a78d1",
+    "purchase-order.png": "09c791ae2985b31305a670463e130aba68eeaaa406eee9f694e3fc74fae33401"
+  },
+  "runs": {
+    "baseline": [
+      {
+        "event": "model_load",
+        "milliseconds": 140.511542,
+        "profile": "balanced",
+        "threads": "2"
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement-rotated.png",
+        "lines": 9,
+        "milliseconds": 6834.286875,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l ofl",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement.png",
+        "lines": 9,
+        "milliseconds": 5196.088917,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l ofl",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register-rotated.png",
+        "lines": 85,
+        "milliseconds": 3787.6362500000005,
+        "text": "ASSET VERIFICATION REGISTER\nLocation:Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY\nCONDITION\nITM-0001\nVERIFIED\n7\nITM-0002\n14\nVERIFIED\nITM-0003\n21\nVERIFIED\nITM-0004\n28\nVERIFIED\n35\nITM-0005\nVERIFIED\n42\nITM-0006\nVERIFIED\nITM-0007\n49\nVERIFIED\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\n70\nITM-0010\nVERIFIED\n77\nITM-0011\nVERIFIED\nITM-0012\n84\nVERIFIED\nITM-0013\n91\nVERIFIED\n98\nITM-0014\nVERIFIED\nITM-0015\n105\nVERIFIED\n112\nITM-0016\nVERIFIED\nITM-0017\n119\nVERIFIED\n126\nITM-0018\nVERIFIED\nITM-0019\n133\nVERIFIED\n140\nITM-0020\nVERIFIED\n147\nITM-0021\nVERIFIED\n154\nITM-0022\nVERIFIED\n161\nITM-0023\nVERIFIED\nITM-0024\n168\nVERIFIED\nITM-0025\n175\nVERIFIED\n182\nITM-0026\nVERIFIED\nChecked by: R. s. Wijaya",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 92
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register.png",
+        "lines": 85,
+        "milliseconds": 6807.595832999999,
+        "text": "ASSET VERIFICATION REGISTER\nLocation:Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nITM-0001\nITM-0002\nITM-0003\nITM-0004\nITM-0005\nITM-0006\nITM-0007\nITM-0008\nITM-0009\nITM-0010\nITM-0011\nITM-0012\nITM-0013\nITM-0014\nITM-0015\nITM-0016\nITM-0017\nITM-0018\nITM-0019\nITM-0020\nITM-0021\nITM-0022\nITM-0023\nITM-0024\nITM-0025\nITM-0026\nQTY\n7\n14\n21\n28\n35\n42\n49\n56\n63\n70\n77\n84\n91\n98\n105\n112\n119\n126\n133\n140\n147\n154\n161\n168\n175\n182\nCONDITION\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nChecked by: R. s. Wijaya",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 380
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order-rotated.png",
+        "lines": 11,
+        "milliseconds": 6161.058667,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order.png",
+        "lines": 11,
+        "milliseconds": 3265.923041,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      }
+    ],
+    "candidate": [
+      {
+        "event": "model_load",
+        "milliseconds": 268.982167,
+        "profile": "fast",
+        "threads": "2"
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement-rotated.png",
+        "lines": 9,
+        "milliseconds": 1691.115959,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage lof 1",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement.png",
+        "lines": 9,
+        "milliseconds": 2092.5877499999997,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage lof 1",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register-rotated.png",
+        "lines": 85,
+        "milliseconds": 5780.243915999999,
+        "text": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY\nCONDITION\nITM-0001\nVERIFIED\n7\nITM-0002\n14\nVERIFIED\nITM-0003\n21\nVERIFIED\nITM-0004\n28\nVERIFIED\n35\nITM-0005\nVERIFIED\n42\nITM-0006\nVERIFIED\nITM-0007\n49\nVERIFIED\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\n70\nITM-0010\nVERIFIED\n77\nITM-0011\nVERIFIED\nITM-0012\n84\nVERIFIED\nITM-0013\n91\nVERIFIED\n98\nITM-0014\nVERIFIED\nITM-0015\n105\nVERIFIED\n112\nITM-0016\nVERIFIED\nITM-0017\n119\nVERIFIED\n126\nITM-0018\nVERIFIED\nITM-0019\n133\nVERIFIED\n140\nITM-0020\nVERIFIED\n147\nITM-0021\nVERIFIED\n154\nITM-0022\nVERIFIED\n161\nITM-0023\nVERIFIED\nITM-0024\n168\nVERIFIED\nITM-0025\n175\nVERIFIED\n182\nITM-0026\nVERIFIED\nChecked by: R. s. Wijaya",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 91
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register.png",
+        "lines": 85,
+        "milliseconds": 8004.046917000001,
+        "text": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nITM-0001\nITM-0002\nITM-0003\nITM-0004\nITM-0005\nITM-0006\nITM-0007\nITM-0008\nITM-0009\nITM-0010\nITM-0011\nITM-0012\nITM-0013\nITM-0014\nITM-0015\nITM-0016\nITM-0017\nITM-0018\nITM-0019\nITM-0020\nITM-0021\nITM-0022\nITM-0023\nITM-0024\nITM-0025\nITM-0026\nQTY\n7\n14\n21\n28\n35\n42\n49\n56\n63\n70\n77\n84\n91\n98\n105\n112\n119\n126\n133\n140\n147\n154\n161\n168\n175\n182\nCONDITION\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nChecked by: R. s. Wijaya",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 379
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order-rotated.png",
+        "lines": 11,
+        "milliseconds": 1791.615542,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order.png",
+        "lines": 11,
+        "milliseconds": 2304.103542,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      }
+    ]
+  },
+  "collector_sha256": {
+    "baseline": "db95711050f7d2122efd8d3bdbb5bd7417451aa56e14503bb75a2b6705230243",
+    "candidate": "dbfe09032fdb923a696444bfeddc429e86e019070e97789d89d723329920e457"
+  },
+  "baseline_reused": "benchmarks/extra-accuracy.json",
+  "regressions": [],
+  "candidate_profile": "fast",
+  "candidate_model_sha256": {
+    "det.rten": "ca1f0196d2a2da2b485e2cda6aaf5ba02258ac71127d577c8a77a75e89b67605",
+    "rec-latin.rten": "6ff6e6544121c225b503f049136b7cdb23a813e26ab3c5e74c094a95f15c9ac4",
+    "dict-latin.txt": "0a4450f64631c386333cc0774edacd4b90b0c765c2fde376503349ee708f9aa9",
+    "orient.rten": "422fa370f05d871f7510b0b4aa453a98a9ed7f7d5284d0f7966bbe9602d82dfa"
+  }
+}

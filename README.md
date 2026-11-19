@@ -1,192 +1,113 @@
 # RP OCR
 
-RP OCR is a standalone Rust library and command-line tool for printed document
-scans. It runs on the CPU using the RustO inference core and pretrained
-PP-OCRv6 Tiny detection and recognition models. Page orientation uses a
-PaddleOCR classifier. A contrast adjustment helps recover washed-out scans.
-[Inference core](https://github.com/byrizki/rusto-rs) · [Model bundle](https://huggingface.co/byrizki/rusto-models/tree/34812c324fa258436fbcf1959eaf4ace7af6e5d4)
+Standalone Rust OCR for printed English and Indonesian document scans. The CLI
+and library run on CPU, using the RustO document pipeline, RTen inference and
+pretrained PaddleOCR PP-OCRv6 Tiny models. No GPU, Tesseract or PDFium runtime is
+required. Recognition was not trained from scratch.
+[Inference core](https://github.com/byrizki/rusto-rs) ·
+[Pinned model source](https://huggingface.co/byrizki/rusto-models/tree/34812c324fa258436fbcf1959eaf4ace7af6e5d4)
 
-The CLI reads JPEG and PNG images. It can return plain text or JSON with
-reading order, confidence scores, and line polygons. The first release
-targets printed Latin-script documents, with English and Indonesian in the
-benchmark. Use rasterized pages for PDF input.
-
-The [matched CPU comparison with Tesseract](benchmarks/COMPARISON.md) records
-three native trials on the same Mac. Configured Tesseract matched compact's
-0.22% CER and had a lower observed median batch time. The report includes the
-large timing ranges, footprints, preprocessing settings, and raw transcripts.
+Inputs are PNG and JPEG. Output is plain text or JSON with page rotation,
+confidence scores and line polygons. Rasterize PDF pages before supplying them.
+Reuse one `Engine` when processing a batch.
 
 ## CPU profiles
 
-Choose `--profile balanced` or `--profile compact`. Both profiles run local CPU
-inference and include page orientation correction. Balanced is the default.
-Compact uses half-precision detection and recognition weight files and limits
-the detector image's longest side to 640 pixels. The recognizer still reads
-crops from the source image.
+| Profile | Detection | Recognition | Runtime model files |
+| --- | --- | --- | ---: |
+| `balanced` (default) | Original resolution | Full precision, multilingual | 12.49 MiB |
+| `fast` (experimental) | Reduced resolution for clear, sparse pages; original otherwise | INT8, English/Indonesian/Latin alphabet | 10.36 MiB |
+| `compact` | Maximum longest side 640 pixels | Half-precision weights, multilingual | 9.46 MiB |
 
-```sh
-target/release/rp-ocr --profile compact prepare
-target/release/rp-ocr --profile compact scan --json scan.png
-```
+Fast retains 692 output classes, including the CTC blank, Latin letters and
+accents, numbers, currency, punctuation, mathematical symbols and space. Its
+reader head is derived reproducibly from the pinned multilingual INT8 model.
+Other alphabetic scripts require balanced or compact. Pruning changes the
+available labels and confidence scores; it is not a replacement for language
+training.
 
-For a standalone compact deployment, package `det-compact.mnn`,
-`rec-compact.mnn`, `dict.txt`, and `orient.rten` with the binary. These models
-total 9.46 MiB. The balanced models total 12.49 MiB. The macOS ARM64 binary
-is 3.33 MiB, giving installed totals of 12.80 MiB and 15.83 MiB respectively.
+Fast uses a 640-pixel detection raster only when the source is at least 640
+pixels on each side, has a white border, and has at most 24 dark text bands on
+each axis. Other pages retain balanced detection. Recognition always reads
+crops from the source image. All profiles include orientation correction,
+contrast recovery and reading-order processing.
 
-A fresh sequential run of all 12 synthetic scans per profile used two RustO
-CPU threads on macOS ARM64. One engine instance served all pages. Model
-verification and loading were measured separately from per-page latency.
+The [CPU optimization report](benchmarks/OPTIMIZATION.md) contains repeated
+Tesseract comparisons, accuracy limits and footprint measurements. These
+profiles were developed on synthetic scans. Dense-table reading order remains
+inaccurate; real-document accuracy is not yet established.
 
-| Measurement | Balanced | Compact |
-| --- | ---: | ---: |
-| Model verification and loading | 125 ms | 133 ms |
-| Median page latency | 1.92 s | 1.25 s |
-| Complete 12-page batch | 25.01 s | 16.61 s |
-| Peak process resident memory | 232.3 MiB | 119.9 MiB |
-| Character edits / 3,184 characters | 4 | 7 |
-| Character error rate | 0.13% | 0.22% |
+## Build and run
 
-Compact reduced median latency by about 35% and measured peak memory by
-about 48% in this run. The resolution limit changes the accuracy tradeoff.
-The compact errors in this suite were on the faded and shadowed scans.
-These are single-pass measurements on a small synthetic set. Earlier batch
-latency varied across runs.
-[Full per-page measurements and transcripts](benchmarks/cpu-profiles-macos-arm64.json)
-
-Reproduce per-page measurements through the public library entry point.
-
-```sh
-cargo build --release --locked --example cpu_latency
-RUSTO_NUM_THREADS=2 target/release/examples/cpu_latency --profile compact \
-  benchmarks/fixtures/*.png benchmarks/fixtures/*.jpg
-```
-
-## Run
-
-Build with Rust 1.96.1 and Cargo. Model setup uses `curl` to download the
-selected weights and verifies each file by SHA-256. Run `prepare` on a
-connected machine, then copy the verified model directory alongside the
-binary for offline use. Scanning only uses local files.
+Build with Rust 1.96.1 and Cargo. Model preparation uses `curl`, verifies pinned
+SHA-256 hashes and, for fast, generates the smaller reader and dictionary locally.
+Scanning uses local files only.
 
 ```sh
 cargo build --release --locked
-target/release/rp-ocr prepare
-target/release/rp-ocr scan benchmarks/fixtures/clean-letter.png
-target/release/rp-ocr scan --json benchmarks/fixtures/rotated-90.png
+target/release/rp-ocr --profile fast prepare
+RUSTO_NUM_THREADS=2 RTEN_NUM_THREADS=2 target/release/rp-ocr \
+  --profile fast scan --json scan.png
 ```
 
-Use `--models /path/to/models` to point to the model directory. For multiple
-inputs, text output separates pages with a form feed and JSON returns one
-object per input, in input order. Polygon coordinates are in pixels from the
-top left, after EXIF correction. Automatic page rotation still returns
-polygons in the original coordinate space of that EXIF-corrected image.
-Confidence scores are model scores. Images can have up to 32 million pixels
+Use `--models /path/to/models` to select a model directory. An offline fast
+installation needs the executable and just these four files:
+
+- `det.rten`
+- `rec-latin.rten`
+- `dict-latin.txt`
+- `orient.rten`
+
+The downloaded parent `rec-int8.rten` and `dict.txt` are preparation caches and
+can be omitted from a fast-only deployment. Balanced needs `det.rten`, `rec.rten`,
+`dict.txt` and `orient.rten`. Compact needs `det-compact.mnn`, `rec-compact.mnn`,
+`dict.txt` and `orient.rten`. Tesseract libraries and traineddata are comparison
+harness dependencies only.
+
+For multiple inputs, text separates pages with a form feed and JSON returns
+one object per input, in input order. Polygon coordinates refer to the supplied
+image after EXIF correction, including when OCR corrects page rotation.
+Confidence scores are model scores. Inputs are limited to 32 million pixels
 and 8,192 pixels per side.
 
 ## Rust API
 
 ```rust
 use std::path::Path;
-use rp_ocr::Engine;
+use rp_ocr::{Engine, Profile};
 
 fn main() -> anyhow::Result<()> {
-    let mut engine = Engine::open(Path::new("models"))?;
+    let mut engine = Engine::open_profile(Path::new("models"), Profile::Fast)?;
     let page = engine.scan_file(Path::new("scan.png"))?;
     println!("{}", page.text());
     Ok(())
 }
 ```
 
-Use `scan_rgb` for an in-memory `image::RgbImage`. Select compact inference
-with `Engine::open_profile(Path::new("models"), rp_ocr::Profile::Compact)`.
+`Engine::open` selects balanced. `scan_rgb` accepts an in-memory
+`image::RgbImage`.
 
-## Verification
+## Verify and benchmark
 
 ```sh
 cargo test --locked
-cargo test --release --locked --test offline -- --ignored
+RUSTO_NUM_THREADS=2 RTEN_NUM_THREADS=2 cargo test --release --locked \
+  --test accuracy --test offline -- --ignored --test-threads=1
+cargo build --release --locked --example cpu_latency
+RUSTO_NUM_THREADS=2 RTEN_NUM_THREADS=2 target/release/examples/cpu_latency \
+  --profile fast benchmarks/fixtures/*.png benchmarks/fixtures/*.jpg
 ```
 
-The offline test uses the prepared model bundle and checks the transcript,
-reading order, and coordinates of a rotated Indonesian scan.
+The accuracy tests compare every original development page with the frozen
+balanced baseline. The offline test also checks rotation, transcript order and
+source-image coordinates. Six additional synthetic scans and their accuracy
+comparison are in `benchmarks/validation` and `benchmarks/extra-accuracy.json`.
 
-## Benchmark
+[Current results and reproduction](benchmarks/OPTIMIZATION.md) ·
+[Original matched comparison](benchmarks/COMPARISON.md) ·
+[Earlier cross-platform experiment](benchmarks/macos-arm64.json) ·
+[Tesseract configuration audit](benchmarks/tesseract-settings-audit.jsonl)
 
-`benchmarks/fixtures` contains synthetic scans and their reference transcripts.
-Each engine processes the 12 images in one CLI invocation. The benchmark
-records character and word error rates and the elapsed time for the batch,
-including startup. Text normalization collapses whitespace and preserves
-case, punctuation, and reading order. Tesseract 5.5.0 runs with `eng+ind` in
-modes 3 and 1. Mode 1 enables orientation detection.
-[Tesseract command-line reference](https://tesseract-ocr.github.io/tessdoc/Command-Line-Usage.html)
-
-```sh
-python3 benchmarks/compare.py --output /tmp/rp-ocr-results.json
-```
-
-Python is used by the benchmark harness. OCR and model verification run in
-the Rust binary. The harness can collect separate runs with `--only rp-ocr`
-or `--only tesseract` when the engines run on different platforms.
-
-### Recorded run
-
-The 12 images come from five synthetic English and Indonesian documents.
-
-| Engine | Runtime platform | Character error rate | Word error rate | Batch time |
-| --- | --- | ---: | ---: | ---: |
-| RP OCR 0.1.0 | macOS ARM64 | 0.13% | 1.09% | 48.0 s |
-| Tesseract 5.5.0, PSM 3 | Linux ARM64 | 30.21% | 34.64% | 159.3 s |
-| Tesseract 5.5.0, PSM 1 | Linux ARM64 | 14.64% | 18.08% | 208.0 s |
-
-RP OCR made four character errors in 3,184 reference characters. It tied
-Tesseract with orientation detection on the three rotated scans and had fewer
-errors on the low-resolution, shadowed, and skewed scans. Tesseract read the
-faded scan exactly, where RP OCR made three character errors.
-
-The offline Linux smoke test passed. The complete Linux RP OCR batch hit a
-300-second timeout, so the accuracy comparison uses macOS output for RP OCR
-and Linux output for Tesseract. The batch times describe their individual
-platforms. Recognition results cover this synthetic suite.
-[RP OCR transcripts](benchmarks/macos-arm64.json) · [Tesseract transcripts](benchmarks/linux-arm64.json)
-
-### Tesseract configuration audit
-
-A direct single-image rerun reproduced the original shadowed invoice output
-of `PLIES` with Tesseract 5.5.0, `eng+ind`, and PSM 1. Switching only to
-`-c thresholding_method=2` (Sauvola) recovered the complete invoice with zero
-character edits. This establishes that the original failure depends on the
-selected thresholding configuration.
-
-| Input | PSM 1, Otsu | PSM 1, Sauvola | PSM 6, Otsu | PSM 6, Sauvola |
-| --- | ---: | ---: | ---: | ---: |
-| Shadowed invoice | 218 | 0 | 222 | 0 |
-| Skewed invoice | 223 | 223 | 18 | 23 |
-| Low-resolution letter | 25 | 30 | 25 | 30 |
-
-Entries are character edit counts. All runs used the same input bytes,
-English and Indonesian language data, and the same Linux container. These
-are diagnostic runs on three selected cases. The original 14.64% aggregate
-CER remains specific to PSM 1 with its original thresholding settings. A
-full-suite aggregate for a tuned Tesseract pipeline remains to be measured.
-
-The Rust prototype's 0.13% CER describes the RustO and pretrained PaddleOCR
-pipeline on this synthetic suite. The evidence supports that measured
-configuration comparison. A general accuracy advantage over Tesseract
-requires broader validation.
-[Raw diagnostic output and commands](benchmarks/tesseract-settings-audit.jsonl) ·
-[Tesseract image-quality guidance](https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html)
-
-### Compact Linux verification
-
-The compact CLI passed the offline rotated-memo smoke test in a Linux ARM64
-container restricted to two CPUs and 2 GiB memory, with networking disabled.
-The complete 12-page compact batch finished in 28.59 seconds, with a 0.81-second
-median per-page latency and seven character edits (0.22% CER). The first
-page took 10.63 seconds and the low-resolution scan took 7.43 seconds, so
-first-request and image-dependent latency still need profiling.
-[Linux measurements and transcripts](benchmarks/cpu-compact-linux-arm64.json)
-
-This completes the compact batch within the previous 300-second harness
-limit. The original balanced Linux timeout still requires its own cause
-analysis. The measurements above cover the compact profile.
+The original 14.64% Tesseract CER applied to PSM 1 with Otsu thresholding. The
+configured Tesseract document pipeline scores 0.22% on the same 12 scans, so
+14.64% should not be used as its general accuracy baseline.

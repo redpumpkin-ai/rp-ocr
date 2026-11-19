@@ -1,0 +1,733 @@
+{
+  "purpose": "Exploratory model-precision accuracy study, one pass per variant. Timing is not a repeated comparative benchmark.",
+  "runs": {
+    "float": [
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+        "milliseconds": 2588.106708,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "float",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+        "milliseconds": 2276.401667,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "float",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+        "milliseconds": 2427.8295000000003,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "float",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+        "milliseconds": 2669.096958,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "float",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+        "milliseconds": 2314.017166,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+        "variant": "float",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+        "milliseconds": 2807.37675,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "float",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+        "milliseconds": 2442.738667,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "float",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+        "milliseconds": 2110.50775,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "float",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+        "milliseconds": 2471.535625,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "float",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+        "milliseconds": 2254.194708,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "float",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+        "milliseconds": 2392.4325,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "float",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 1
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+        "milliseconds": 2283.05675,
+        "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+        "variant": "float",
+        "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+        "reference_characters": 249,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement-rotated.png",
+        "milliseconds": 3299.0727500000003,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l ofl",
+        "variant": "float",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement.png",
+        "milliseconds": 2904.005792,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l ofl",
+        "variant": "float",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register-rotated.png",
+        "milliseconds": 7681.177542,
+        "text": "ASSET VERIFICATION REGISTER\nLocation:Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY\nCONDITION\nITM-0001\nVERIFIED\n7\nITM-0002\n14\nVERIFIED\nITM-0003\n21\nVERIFIED\nITM-0004\n28\nVERIFIED\n35\nITM-0005\nVERIFIED\n42\nITM-0006\nVERIFIED\nITM-0007\n49\nVERIFIED\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\n70\nITM-0010\nVERIFIED\n77\nITM-0011\nVERIFIED\nITM-0012\n84\nVERIFIED\nITM-0013\n91\nVERIFIED\n98\nITM-0014\nVERIFIED\nITM-0015\n105\nVERIFIED\n112\nITM-0016\nVERIFIED\nITM-0017\n119\nVERIFIED\n126\nITM-0018\nVERIFIED\nITM-0019\n133\nVERIFIED\n140\nITM-0020\nVERIFIED\n147\nITM-0021\nVERIFIED\n154\nITM-0022\nVERIFIED\n161\nITM-0023\nVERIFIED\nITM-0024\n168\nVERIFIED\nITM-0025\n175\nVERIFIED\n182\nITM-0026\nVERIFIED\nChecked by: R. s. Wijaya",
+        "variant": "float",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 92
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register.png",
+        "milliseconds": 8387.638583,
+        "text": "ASSET VERIFICATION REGISTER\nLocation:Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nITM-0001\nITM-0002\nITM-0003\nITM-0004\nITM-0005\nITM-0006\nITM-0007\nITM-0008\nITM-0009\nITM-0010\nITM-0011\nITM-0012\nITM-0013\nITM-0014\nITM-0015\nITM-0016\nITM-0017\nITM-0018\nITM-0019\nITM-0020\nITM-0021\nITM-0022\nITM-0023\nITM-0024\nITM-0025\nITM-0026\nQTY\n7\n14\n21\n28\n35\n42\n49\n56\n63\n70\n77\n84\n91\n98\n105\n112\n119\n126\n133\n140\n147\n154\n161\n168\n175\n182\nCONDITION\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nChecked by: R. s. Wijaya",
+        "variant": "float",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 380
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order-rotated.png",
+        "milliseconds": 3332.670333,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "float",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order.png",
+        "milliseconds": 3047.2616669999998,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "float",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      }
+    ],
+    "int8-det": [
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+        "milliseconds": 2599.922958,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "int8-det",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+        "milliseconds": 2746.691208,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-det",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+        "milliseconds": 2442.838,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "int8-det",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+        "milliseconds": 2463.809084,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-det",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+        "milliseconds": 2843.9860000000003,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received. 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+        "variant": "int8-det",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 5
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+        "milliseconds": 2366.998708,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleareditems and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "int8-det",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 1
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+        "milliseconds": 2442.722041,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-det",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+        "milliseconds": 2054.165333,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-det",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+        "milliseconds": 1081.214959,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "int8-det",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+        "milliseconds": 553.414667,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-det",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+        "milliseconds": 2616.806375,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-det",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 1
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+        "milliseconds": 2339.4565,
+        "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+        "variant": "int8-det",
+        "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+        "reference_characters": 249,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement-rotated.png",
+        "milliseconds": 3896.197875,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l of1",
+        "variant": "int8-det",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement.png",
+        "milliseconds": 4430.833541,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l of1",
+        "variant": "int8-det",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register-rotated.png",
+        "milliseconds": 4099.080416,
+        "text": "ASSET VERIFICATION REGISTER\nLocation:Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY CONDITION\nITM-0001\n7 VERIFIED\n14\nITM-0002\nVERIFIED\nITM-0003\n21\nVERIFIED\nITM-0004\n28\nVERIFIED\nITM-0005\n35\nVERIFIED\nITM-0006\n42\nVERIFIED\nITM-0007\nVERIFIED\n49\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\n70\nITM-0010\nVERIFIED\n77\nITM-0011\nVERIFIED\nITM-0012\n84\nVERIFIED\n91\nITM-0013\nVERIFIED\n98\nITM-0014\nVERIFIED\n105\nITM-0015\nVERIFIED\n112\nITM-0016\nVERIFIED\n119\nITM-0017\nVERIFIED\n126\nITM-0018\nVERIFIED\n133\nITM-0019\nVERIFIED\nITM-0020 140\nVERIFIED\n147\nITM-0021\nVERIFIED\nITM-0022 154\nVERIFIED\nITM-0023\n161\nVERIFIED\n168\nITM-0024\nVERIFIED\nITM-0025\n175\nVERIFIED\nITM-0026 182 VERIFIED\nChecked by:R. S. Wijaya",
+        "variant": "int8-det",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 94
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register.png",
+        "milliseconds": 2399.1842920000004,
+        "text": "ASSET VERIFICATION REGISTER\nLocation:Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY CONDITION\nITM-0001\n7 VERIFIED\nITM-0002\n14\nVERIFIED\nITM-0003\n21 VERIFIED\nITM-0004\n28\nVERIFIED\nITM-0005\n35\nVERIFIED\nITM-0006\n42\nVERIFIED\nITM-0007\n49\nVERIFIED\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\nITM-0010\n70\nVERIFIED\nITM-0011\n77\nVERIFIED\nITM-0012\n84 VERIFIED\nITM-0013\n91\nVERIFIED\nITM-0014\n98\nVERIFIED\nITM-0015\n105\nVERIFIED\nITM-0016 112\nVERIFIED\nITM-0017\n119\nVERIFIED\nITM-0018\n126\nVERIFIED\nITM-0019 133\nVERIFIED\nITM-0020 140\nVERIFIED\nITM-0021\n147\nVERIFIED\nITM-0022 154 VERIFIED\nITM-0023\n161 VERIFIED\nITM-0024 168\nVERIFIED\nITM-0025\n175 VERIFIED\nITM-0026 182 VERIFIED\nChecked by:R. S. Wijaya",
+        "variant": "int8-det",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order-rotated.png",
+        "milliseconds": 858.8011250000001,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "int8-det",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order.png",
+        "milliseconds": 4658.935625,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "int8-det",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      }
+    ],
+    "int8-rec": [
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+        "milliseconds": 2553.252584,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "int8-rec",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+        "milliseconds": 1243.041791,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-rec",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+        "milliseconds": 606.351583,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "int8-rec",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+        "milliseconds": 488.513333,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-rec",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+        "milliseconds": 906.5672089999999,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+        "variant": "int8-rec",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+        "milliseconds": 499.74429100000003,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "int8-rec",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+        "milliseconds": 505.05975,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-rec",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+        "milliseconds": 260.244584,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-rec",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+        "milliseconds": 293.790708,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "int8-rec",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+        "milliseconds": 343.698041,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-rec",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+        "milliseconds": 423.16975,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-rec",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+        "milliseconds": 392.101625,
+        "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+        "variant": "int8-rec",
+        "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+        "reference_characters": 249,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement-rotated.png",
+        "milliseconds": 754.6850830000001,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l ofl",
+        "variant": "int8-rec",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement.png",
+        "milliseconds": 668.473208,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l ofl",
+        "variant": "int8-rec",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 3
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register-rotated.png",
+        "milliseconds": 1773.0809170000002,
+        "text": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY\nCONDITION\nITM-0001\nVERIFIED\n7\nITM-0002\n14\nVERIFIED\nITM-0003\n21\nVERIFIED\nITM-0004\n28\nVERIFIED\n35\nITM-0005\nVERIFIED\n42\nITM-0006\nVERIFIED\nITM-0007\n49\nVERIFIED\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\n70\nITM-0010\nVERIFIED\n77\nITM-0011\nVERIFIED\nITM-0012\n84\nVERIFIED\nITM-0013\n91\nVERIFIED\n98\nITM-0014\nVERIFIED\nITM-0015\n105\nVERIFIED\n112\nITM-0016\nVERIFIED\nITM-0017\n119\nVERIFIED\n126\nITM-0018\nVERIFIED\nITM-0019\n133\nVERIFIED\n140\nITM-0020\nVERIFIED\n147\nITM-0021\nVERIFIED\n154\nITM-0022\nVERIFIED\n161\nITM-0023\nVERIFIED\nITM-0024\n168\nVERIFIED\nITM-0025\n175\nVERIFIED\n182\nITM-0026\nVERIFIED\nChecked by: R. s. Wijaya",
+        "variant": "int8-rec",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 91
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register.png",
+        "milliseconds": 1722.8461670000002,
+        "text": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nITM-0001\nITM-0002\nITM-0003\nITM-0004\nITM-0005\nITM-0006\nITM-0007\nITM-0008\nITM-0009\nITM-0010\nITM-0011\nITM-0012\nITM-0013\nITM-0014\nITM-0015\nITM-0016\nITM-0017\nITM-0018\nITM-0019\nITM-0020\nITM-0021\nITM-0022\nITM-0023\nITM-0024\nITM-0025\nITM-0026\nQTY\n7\n14\n21\n28\n35\n42\n49\n56\n63\n70\n77\n84\n91\n98\n105\n112\n119\n126\n133\n140\n147\n154\n161\n168\n175\n182\nCONDITION\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nVERIFIED\nChecked by: R. s. Wijaya",
+        "variant": "int8-rec",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 379
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order-rotated.png",
+        "milliseconds": 854.9995419999999,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "int8-rec",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order.png",
+        "milliseconds": 656.7077919999999,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "int8-rec",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      }
+    ],
+    "int8-both": [
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-letter.png",
+        "milliseconds": 306.486208,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "int8-both",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-manifest.png",
+        "milliseconds": 279.815083,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-both",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-memo-id.png",
+        "milliseconds": 289.721334,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "int8-both",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/clean-receipt.png",
+        "milliseconds": 316.61525,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-both",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/faded.jpg",
+        "milliseconds": 276.877416,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code BX-1806-1007\nSeria|: 7G92-PLQ5-670Z\nQuantity received. 37 of 40\nThree cartons remain at the loading dock\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00",
+        "variant": "int8-both",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 5
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/low-resolution.jpg",
+        "milliseconds": 284.512792,
+        "text": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleareditems and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481",
+        "variant": "int8-both",
+        "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+        "reference_characters": 333,
+        "character_edits": 1
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-180.png",
+        "milliseconds": 295.117666,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-both",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-270.png",
+        "milliseconds": 356.916209,
+        "text": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.",
+        "variant": "int8-both",
+        "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+        "reference_characters": 237,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/rotated-90.png",
+        "milliseconds": 423.530958,
+        "text": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B",
+        "variant": "int8-both",
+        "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+        "reference_characters": 326,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/shadowed.jpg",
+        "milliseconds": 334.08725,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-both",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/skewed.png",
+        "milliseconds": 313.27500000000003,
+        "text": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185",
+        "variant": "int8-both",
+        "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+        "reference_characters": 223,
+        "character_edits": 1
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/fixtures/two-columns.png",
+        "milliseconds": 363.90516699999995,
+        "text": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.",
+        "variant": "int8-both",
+        "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+        "reference_characters": 249,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement-rotated.png",
+        "milliseconds": 667.412,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l of1",
+        "variant": "int8-both",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/agreement.png",
+        "milliseconds": 504.95358300000004,
+        "text": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage l of1",
+        "variant": "int8-both",
+        "reference": "SERVICE AGREEMENT\nAgreement ID: SA-2026-7319\nSupplier: Surya Digital Nusantara\nService period: 01 December 2026 to 28 February 2027\nMonthly fee: Rp 12.750.000\nPayment is due within 21 calendar days.\nKeep one signed copy with the purchase order.\nApproved by: Maya Hartono\nPage 1 of 1\n",
+        "reference_characters": 282,
+        "character_edits": 2
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register-rotated.png",
+        "milliseconds": 826.5271250000001,
+        "text": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY CONDITION\nITM-0001\n7 VERIFIED\n14\nITM-0002\nVERIFIED\nITM-0003\n21\nVERIFIED\nITM-0004\n28\nVERIFIED\nITM-0005\n35\nVERIFIED\nITM-0006\n42\nVERIFIED\nITM-0007\nVERIFIED\n49\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\n70\nITM-0010\nVERIFIED\n77\nITM-0011\nVERIFIED\nITM-0012\n84\nVERIFIED\n91\nITM-0013\nVERIFIED\n98\nITM-0014\nVERIFIED\n105\nITM-0015\nVERIFIED\n112\nITM-0016\nVERIFIED\n119\nITM-0017\nVERIFIED\n126\nITM-0018\nVERIFIED\n133\nITM-0019\nVERIFIED\nITM-0020 140\nVERIFIED\n147\nITM-0021\nVERIFIED\nITM-0022 154\nVERIFIED\nITM-0023\n161\nVERIFIED\n168\nITM-0024\nVERIFIED\nITM-0025\n175\nVERIFIED\nITM-0026 182 VERIFIED\nChecked by:R. S. Wijaya",
+        "variant": "int8-both",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 93
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/asset-register.png",
+        "milliseconds": 859.2163750000001,
+        "text": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE\nQTY CONDITION\nITM-0001\n7 VERIFIED\nITM-0002\n14\nVERIFIED\nITM-0003\n21 VERIFIED\nITM-0004\n28\nVERIFIED\nITM-0005\n35\nVERIFIED\nITM-0006\n42\nVERIFIED\nITM-0007\n49\nVERIFIED\nITM-0008\n56\nVERIFIED\nITM-0009\n63\nVERIFIED\nITM-0010\n70\nVERIFIED\nITM-0011\n77\nVERIFIED\nITM-0012\n84 VERIFIED\nITM-0013\n91\nVERIFIED\nITM-0014\n98\nVERIFIED\nITM-0015\n105\nVERIFIED\nITM-0016 112\nVERIFIED\nITM-0017\n119\nVERIFIED\nITM-0018\n126\nVERIFIED\nITM-0019 133\nVERIFIED\nITM-0020 140\nVERIFIED\nITM-0021\n147\nVERIFIED\nITM-0022 154 VERIFIED\nITM-0023\n161 VERIFIED\nITM-0024 168\nVERIFIED\nITM-0025\n175 VERIFIED\nITM-0026 182 VERIFIED\nChecked by:R. S. Wijaya",
+        "variant": "int8-both",
+        "reference": "ASSET VERIFICATION REGISTER\nLocation: Bandung Warehouse 04\nChecked on 24 November 2026\nCODE      QTY  CONDITION\nITM-0001    7  VERIFIED\nITM-0002   14  VERIFIED\nITM-0003   21  VERIFIED\nITM-0004   28  VERIFIED\nITM-0005   35  VERIFIED\nITM-0006   42  VERIFIED\nITM-0007   49  VERIFIED\nITM-0008   56  VERIFIED\nITM-0009   63  VERIFIED\nITM-0010   70  VERIFIED\nITM-0011   77  VERIFIED\nITM-0012   84  VERIFIED\nITM-0013   91  VERIFIED\nITM-0014   98  VERIFIED\nITM-0015  105  VERIFIED\nITM-0016  112  VERIFIED\nITM-0017  119  VERIFIED\nITM-0018  126  VERIFIED\nITM-0019  133  VERIFIED\nITM-0020  140  VERIFIED\nITM-0021  147  VERIFIED\nITM-0022  154  VERIFIED\nITM-0023  161  VERIFIED\nITM-0024  168  VERIFIED\nITM-0025  175  VERIFIED\nITM-0026  182  VERIFIED\nChecked by: R. S. Wijaya\n",
+        "reference_characters": 687,
+        "character_edits": 1
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order-rotated.png",
+        "milliseconds": 744.064166,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "int8-both",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      },
+      {
+        "event": "page",
+        "image": "/private/tmp/rp-ocr-build.f7STZ8/benchmarks/validation/purchase-order.png",
+        "milliseconds": 943.380125,
+        "text": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso",
+        "variant": "int8-both",
+        "reference": "PESANAN PEMBELIAN\nNomor pesanan: PO-2026-58317\nTanggal: 23 November 2026\nPemasok: PT Citra Mandiri\n25 kotak kertas A4 x Rp 58.000\n14 map arsip x Rp 17.500\nSubtotal: Rp 1.695.000\nPajak 11%: Rp 186.450\nTotal pembayaran: Rp 1.881.450\nKirim sebelum pukul 14:45.\nPetugas penerima: Bima Prakoso\n",
+        "reference_characters": 288,
+        "character_edits": 0
+      }
+    ]
+  }
+}
