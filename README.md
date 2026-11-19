@@ -49,13 +49,24 @@ fn main() -> anyhow::Result<()> {
 
 Use `scan_rgb` for an in-memory `image::RgbImage`.
 
+## Verification
+
+```sh
+cargo test --locked
+cargo test --release --locked --test offline -- --ignored
+```
+
+The offline test uses the prepared model bundle and checks the transcript,
+reading order, and coordinates of a rotated Indonesian scan.
+
 ## Benchmark
 
 `benchmarks/fixtures` contains synthetic scans and their reference transcripts.
-The comparison records character error rate, word error rate, and median cold
-CLI latency across three runs per image. Text normalization collapses
-whitespace and preserves case, punctuation, and reading order. Tesseract runs
-with `eng+ind` in modes 3 and 1. Mode 1 enables orientation detection.
+Each engine processes the 12 images in one CLI invocation. The benchmark
+records character and word error rates and the elapsed time for the batch,
+including startup. Text normalization collapses whitespace and preserves
+case, punctuation, and reading order. Tesseract 5.5.0 runs with `eng+ind` in
+modes 3 and 1. Mode 1 enables orientation detection.
 [Tesseract command-line reference](https://tesseract-ocr.github.io/tessdoc/Command-Line-Usage.html)
 
 ```sh
@@ -63,4 +74,26 @@ python3 benchmarks/compare.py --output /tmp/rp-ocr-results.json
 ```
 
 Python is used by the benchmark harness. OCR and model verification run in
-the Rust binary.
+the Rust binary. The harness can collect separate runs with `--only rp-ocr`
+or `--only tesseract` when the engines run on different platforms.
+
+### Recorded run
+
+The 12 images come from five synthetic English and Indonesian documents.
+
+| Engine | Runtime platform | Character error rate | Word error rate | Batch time |
+| --- | --- | ---: | ---: | ---: |
+| RP OCR 0.1.0 | macOS ARM64 | 0.13% | 1.09% | 48.0 s |
+| Tesseract 5.5.0, PSM 3 | Linux ARM64 | 30.21% | 34.64% | 159.3 s |
+| Tesseract 5.5.0, PSM 1 | Linux ARM64 | 14.64% | 18.08% | 208.0 s |
+
+RP OCR made four character errors in 3,184 reference characters. It tied
+Tesseract with orientation detection on the three rotated scans and had fewer
+errors on the low-resolution, shadowed, and skewed scans. Tesseract read the
+faded scan exactly, where RP OCR made three character errors.
+
+The offline Linux smoke test passed. The complete Linux RP OCR batch hit a
+300-second timeout, so the accuracy comparison uses macOS output for RP OCR
+and Linux output for Tesseract. The batch times describe their individual
+platforms. Recognition results cover this synthetic suite.
+[RP OCR transcripts](benchmarks/macos-arm64.json) · [Tesseract transcripts](benchmarks/linux-arm64.json)

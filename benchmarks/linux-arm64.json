@@ -1,0 +1,243 @@
+{
+  "machine": "aarch64",
+  "system": "Linux",
+  "versions": {
+    "tesseract": "tesseract 5.5.0"
+  },
+  "tesseract_languages": "eng+ind",
+  "thread_limit": 2,
+  "batch_runs": {
+    "tesseract-psm3": {
+      "seconds": 159.2856,
+      "stderr": "Page 0 : /ocr/benchmarks/fixtures/clean-letter.png\nPage 1 : /ocr/benchmarks/fixtures/clean-manifest.png\nPage 2 : /ocr/benchmarks/fixtures/clean-memo-id.png\nPage 3 : /ocr/benchmarks/fixtures/clean-receipt.png\nPage 4 : /ocr/benchmarks/fixtures/faded.jpg\nPage 5 : /ocr/benchmarks/fixtures/low-resolution.jpg\nPage 6 : /ocr/benchmarks/fixtures/rotated-180.png\nPage 7 : /ocr/benchmarks/fixtures/rotated-270.png\nPage 8 : /ocr/benchmarks/fixtures/rotated-90.png\nPage 9 : /ocr/benchmarks/fixtures/shadowed.jpg\nPage 10 : /ocr/benchmarks/fixtures/skewed.png\nEmpty page!!\nEmpty page!!\nPage 11 : /ocr/benchmarks/fixtures/two-columns.png\n"
+    },
+    "tesseract-psm1": {
+      "seconds": 207.9901,
+      "stderr": "Page 0 : /ocr/benchmarks/fixtures/clean-letter.png\nPage 1 : /ocr/benchmarks/fixtures/clean-manifest.png\nPage 2 : /ocr/benchmarks/fixtures/clean-memo-id.png\nPage 3 : /ocr/benchmarks/fixtures/clean-receipt.png\nPage 4 : /ocr/benchmarks/fixtures/faded.jpg\nPage 5 : /ocr/benchmarks/fixtures/low-resolution.jpg\nOSD: Weak margin (1.28) for 135 blob text block, but using orientation anyway: 0\nPage 6 : /ocr/benchmarks/fixtures/rotated-180.png\nPage 7 : /ocr/benchmarks/fixtures/rotated-270.png\nPage 8 : /ocr/benchmarks/fixtures/rotated-90.png\nPage 9 : /ocr/benchmarks/fixtures/shadowed.jpg\nToo few characters. Skipping this page\nOSD: Weak margin (0.00) for 2 blob text block, but using orientation anyway: 0\nPage 10 : /ocr/benchmarks/fixtures/skewed.png\nOSD: Weak margin (5.00) for 155 blob text block, but using orientation anyway: 0\nEmpty page!!\nOSD: Weak margin (5.00) for 155 blob text block, but using orientation anyway: 0\nEmpty page!!\nPage 11 : /ocr/benchmarks/fixtures/two-columns.png\n"
+    }
+  },
+  "all_images": {
+    "tesseract-psm3": {
+      "character_error_rate": 0.3021356783919598,
+      "word_error_rate": 0.3464052287581699
+    },
+    "tesseract-psm1": {
+      "character_error_rate": 0.146356783919598,
+      "word_error_rate": 0.18082788671023964
+    }
+  },
+  "rotated": {
+    "tesseract-psm3": {
+      "character_error_rate": 0.62,
+      "word_error_rate": 0.6846846846846847
+    },
+    "tesseract-psm1": {
+      "character_error_rate": 0.0,
+      "word_error_rate": 0.0
+    }
+  },
+  "other_images": {
+    "tesseract-psm3": {
+      "character_error_rate": 0.19546979865771813,
+      "word_error_rate": 0.23850574712643677
+    },
+    "tesseract-psm1": {
+      "character_error_rate": 0.19546979865771813,
+      "word_error_rate": 0.23850574712643677
+    }
+  },
+  "cases": [
+    {
+      "image": "clean-letter.png",
+      "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\n\nReference: FIN-2026-0481\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "MONTHLY SERVICE REVIEW\n\nNovember 19, 2026\n\nTo the finance operations team,\n\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\n\nReference: FIN-2026-0481\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "clean-manifest.png",
+      "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "clean-memo-id.png",
+      "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "clean-receipt.png",
+      "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "NUSANTARA SUPPLIES\n\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\n\nDiscount: Rp 14.000\n\nTOTAL: Rp 400.000\n\nPembayaran via transfer bank\n\nTransaction ID: TX-7630-4185\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "faded.jpg",
+      "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "low-resolution.jpg",
+      "reference": "MONTHLY SERVICE REVIEW\nNovember 19, 2026\nTo the finance operations team,\nPlease reconcile the October invoice register before Friday.\nThe current report lists 208 cleared items and 14 open items.\nKeep the original receipts with the supporting documents.\nSend any exceptions to the assigned reviewer by 15:30.\nReference: FIN-2026-0481\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "MONTHLY SERVICE REVIEW\n\nNovember 19,2028\n‘To tho finance operations team,\n\nPlease reconcile the October invoice register before Friday.\n“The cumunt opor ists 208 cleared items and 14 open items\n‘oop the original cepts with the supporing documents\nSend any exceptions tothe assigned reviewer by 1530\nReference: FIN-2026.0481\n",
+          "character_edits": 25,
+          "word_edits": 17
+        },
+        "tesseract-psm1": {
+          "text": "MONTHLY SERVICE REVIEW\n\nNovember 19,2028\n‘To tho finance operations team,\n\nPlease reconcile the October invoice register before Friday.\n“The cumunt opor ists 208 cleared items and 14 open items\n‘oop the original cepts with the supporing documents\nSend any exceptions tothe assigned reviewer by 1530\nReference: FIN-2026.0481\n",
+          "character_edits": 25,
+          "word_edits": 17
+        }
+      }
+    },
+    {
+      "image": "rotated-180.png",
+      "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "“00:21 Aq sonsiBo] 0} Adoo uinyay\nUEMENSS VY uosiMladnS\n\n190p Burpeoj ey} ye urewei suoped ety)\nOv JO ZE :panladal AUeND\n\nZ0L9-SO 1d-C6D4 ‘BLES\n\nZ001-9081-X@ :2P02 jessy\n\n80-V :ulg 26e101S\n\nSp:90 :ewy Yyoyedsiq\n\nYsaASNVaL ISNOHINYM\n",
+          "character_edits": 212,
+          "word_edits": 35
+        },
+        "tesseract-psm1": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "rotated-270.png",
+      "reference": "WAREHOUSE TRANSFER\nDispatch time: 06:45\nStorage bin: A-08\nAsset code: BX-1806-1007\nSerial: 7G92-PLQ5-670Z\nQuantity received: 37 of 40\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\nReturn copy to logistics by 17:00.\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "WAREHOUSE TRANSFER\n\nDispatch time: 06:45\n\nStorage bin: A-08\n\nAsset code: BX-1806-1007\n\nSerial: 7G92-PLQ5-670Z\n\nQuantity received: 37 of 40\n\nThree cartons remain at the loading dock.\nSupervisor: K. A. Setiawan\n\nReturn copy to logistics by 17:00.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "rotated-90.png",
+      "reference": "CATATAN PEMERIKSAAN DOKUMEN\nTanggal pemeriksaan: 19 November 2026\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\nNomor referensi: ADM-0247-B\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "@-/p20-NGV :sussajal JOWON\n\n‘deyBua] UeyejeAuip seyJag Yynunjes Yyejajas ueysnieyip Uslodey\n‘ueBuensy wi} uep jewajul esyuswad ynjun useujjes uedwis\n“disue wnjagas jeins Jowou uep uebue} epue} je66ue) esyed\n‘Iseqsiulupe uelBeq yao ewueyIp ueepebued uswnyog\n\n9ZOT JOGWSMON 6] :uUeesyeWed je66uey\n\nNIWNYMOG NVVSVISINTd NVLVLVI\n",
+          "character_edits": 284,
+          "word_edits": 41
+        },
+        "tesseract-psm1": {
+          "text": "CATATAN PEMERIKSAAN DOKUMEN\n\nTanggal pemeriksaan: 19 November 2026\n\nDokumen pengadaan diterima oleh bagian administrasi.\nPeriksa tanggal tanda tangan dan nomor surat sebelum arsip.\nSimpan salinan untuk pemeriksa internal dan tim keuangan.\nLaporan diteruskan setelah seluruh berkas dinyatakan lengkap.\n\nNomor referensi: ADM-0247-B\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    },
+    {
+      "image": "shadowed.jpg",
+      "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "PLIES\n\n",
+          "character_edits": 218,
+          "word_edits": 33
+        },
+        "tesseract-psm1": {
+          "text": "PLIES\n\n",
+          "character_edits": 218,
+          "word_edits": 33
+        }
+      }
+    },
+    {
+      "image": "skewed.png",
+      "reference": "NUSANTARA SUPPLIES\nINVOICE NO: NS-0416-82\nDocument sleeves: 12 x Rp 18.500\nArchival folders: 8 x Rp 24.000\nSubtotal: Rp 414.000\nDiscount: Rp 14.000\nTOTAL: Rp 400.000\nPembayaran via transfer bank\nTransaction ID: TX-7630-4185\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "",
+          "character_edits": 223,
+          "word_edits": 33
+        },
+        "tesseract-psm1": {
+          "text": "",
+          "character_edits": 223,
+          "word_edits": 33
+        }
+      }
+    },
+    {
+      "image": "two-columns.png",
+      "reference": "The western warehouse\nholds the replacement parts.\nShip four cartons to the\nservice team on Monday.\nFile the dispatch slip.\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\nconfirm the final count.\n",
+      "engines": {
+        "tesseract-psm3": {
+          "text": "The western warehouse\n\nholds the replacement parts.\n\nShip four cartons to the\nservice team on Monday.\n\nFile the dispatch slip.\n\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\n\nconfirm the final count.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        },
+        "tesseract-psm1": {
+          "text": "The western warehouse\n\nholds the replacement parts.\n\nShip four cartons to the\nservice team on Monday.\n\nFile the dispatch slip.\n\nThe eastern warehouse\nholds the returned devices.\nInspect each serial number.\nAsk the repair desk to\n\nconfirm the final count.\n",
+          "character_edits": 0,
+          "word_edits": 0
+        }
+      }
+    }
+  ]
+}
