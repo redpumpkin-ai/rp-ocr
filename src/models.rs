@@ -6,9 +6,12 @@ use std::process::Command;
 use anyhow::{Context, Result, ensure};
 use sha2::{Digest, Sha256};
 
+use crate::Profile;
+
 const SOURCE: &str =
     "https://huggingface.co/byrizki/rusto-models/resolve/34812c324fa258436fbcf1959eaf4ace7af6e5d4";
 
+#[derive(Clone, Copy)]
 struct Asset {
     upstream: &'static str,
     filename: &'static str,
@@ -38,10 +41,37 @@ const ASSETS: [Asset; 4] = [
     },
 ];
 
+const COMPACT_ASSETS: [Asset; 4] = [
+    Asset {
+        upstream: "ppocrv6-tiny-fp16/det.mnn",
+        filename: "det-compact.mnn",
+        sha256: "5100ad4adffc406385fcb7478b01a3fa11fb9fd417e9a39789c355fc15e949e8",
+    },
+    Asset {
+        upstream: "ppocrv6-tiny-fp16/rec.mnn",
+        filename: "rec-compact.mnn",
+        sha256: "e825329be1c21c5d22b9eb4afc946d8bc70545297476b76938efbe9dfd4ec500",
+    },
+    ASSETS[2],
+    ASSETS[3],
+];
+
+fn assets(profile: Profile) -> &'static [Asset] {
+    match profile {
+        Profile::Balanced => &ASSETS,
+        Profile::Compact => &COMPACT_ASSETS,
+    }
+}
+
 /// Provision the pinned model assets. Only this operation uses the network.
 pub fn prepare(directory: &Path) -> Result<()> {
+    prepare_profile(directory, Profile::Balanced)
+}
+
+/// Download and verify the models required by the selected CPU profile.
+pub fn prepare_profile(directory: &Path, profile: Profile) -> Result<()> {
     fs::create_dir_all(directory)?;
-    for asset in &ASSETS {
+    for asset in assets(profile) {
         let destination = directory.join(asset.filename);
         if matches_digest(&destination, asset.sha256)? {
             continue;
@@ -87,12 +117,16 @@ pub fn prepare(directory: &Path) -> Result<()> {
     Ok(())
 }
 
-pub(crate) fn verify(directory: &Path) -> Result<()> {
-    for asset in &ASSETS {
+pub(crate) fn verify(directory: &Path, profile: Profile) -> Result<()> {
+    let profile_name = match profile {
+        Profile::Balanced => "balanced",
+        Profile::Compact => "compact",
+    };
+    for asset in assets(profile) {
         let path = directory.join(asset.filename);
         ensure!(
             matches_digest(&path, asset.sha256)?,
-            "{} is missing or failed verification. Run rp-ocr --models {} prepare.",
+            "{} is missing or failed verification. Run rp-ocr --profile {profile_name} --models {} prepare.",
             path.display(),
             directory.display()
         );

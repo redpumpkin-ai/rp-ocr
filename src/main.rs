@@ -3,7 +3,7 @@ use std::path::PathBuf;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use rp_ocr::{Engine, Page, models};
+use rp_ocr::{Engine, Page, Profile, models};
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -12,6 +12,9 @@ struct Cli {
     /// Directory that holds the checked OCR models
     #[arg(long, global = true, default_value = "models")]
     models: PathBuf,
+    /// Compact uses half-precision OCR weights and a 640-pixel detector limit
+    #[arg(long, global = true, value_enum, default_value = "balanced")]
+    profile: Profile,
     #[command(subcommand)]
     command: Command,
 }
@@ -41,11 +44,11 @@ fn main() -> Result<()> {
     let args = Cli::parse();
     match args.command {
         Command::Prepare => {
-            models::prepare(&args.models)?;
+            models::prepare_profile(&args.models, args.profile)?;
             eprintln!("Verified OCR models in {}", args.models.display());
         }
         Command::Scan { json, inputs } => {
-            let mut engine = Engine::open(&args.models)?;
+            let mut engine = Engine::open_profile(&args.models, args.profile)?;
             let pages = inputs
                 .into_iter()
                 .map(|source| {

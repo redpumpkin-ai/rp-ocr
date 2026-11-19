@@ -8,6 +8,15 @@ use serde::Serialize;
 mod contrast;
 pub mod models;
 
+/// Select the model precision and detector resolution for CPU inference.
+#[derive(Clone, Copy, Debug, Default, clap::ValueEnum, Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Profile {
+    #[default]
+    Balanced,
+    Compact,
+}
+
 const MAX_DIMENSION: u32 = 8_192;
 const MAX_PIXELS: u64 = 32_000_000;
 
@@ -44,13 +53,26 @@ pub struct Engine {
 impl Engine {
     /// Load an existing model bundle. This operation does not use the network.
     pub fn open(model_dir: &Path) -> Result<Self> {
-        models::verify(model_dir)?;
-        let config = InitializeConfig::ppv6(
-            model_dir.join("det.rten"),
-            model_dir.join("rec.rten"),
+        Self::open_profile(model_dir, Profile::Balanced)
+    }
+
+    /// Load a selected CPU profile from a verified local model bundle.
+    pub fn open_profile(model_dir: &Path, profile: Profile) -> Result<Self> {
+        models::verify(model_dir, profile)?;
+        let (detector, recognizer) = match profile {
+            Profile::Balanced => ("det.rten", "rec.rten"),
+            Profile::Compact => ("det-compact.mnn", "rec-compact.mnn"),
+        };
+        let mut config = InitializeConfig::ppv6(
+            model_dir.join(detector),
+            model_dir.join(recognizer),
             model_dir.join("dict.txt"),
         )
         .with_orientation(model_dir.join("orient.rten"));
+        if matches!(profile, Profile::Compact) {
+            config.det.limit_type = "max".to_string();
+            config.det.limit_side_len = 640;
+        }
         let ocr = RustO::initialize(config).context("could not load the OCR models")?;
         Ok(Self { ocr })
     }
