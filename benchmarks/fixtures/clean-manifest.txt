@@ -1,0 +1,9 @@
+WAREHOUSE TRANSFER
+Dispatch time: 06:45
+Storage bin: A-08
+Asset code: BX-1806-1007
+Serial: 7G92-PLQ5-670Z
+Quantity received: 37 of 40
+Three cartons remain at the loading dock.
+Supervisor: K. A. Setiawan
+Return copy to logistics by 17:00.
