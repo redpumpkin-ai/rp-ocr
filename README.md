@@ -190,3 +190,9 @@ first-request and image-dependent latency still need profiling.
 This completes the compact batch within the previous 300-second harness
 limit. The original balanced Linux timeout still requires its own cause
 analysis. The measurements above cover the compact profile.
+
+## License
+
+RP OCR is licensed under the [Apache License 2.0](LICENSE). The pretrained
+models downloaded by `prepare` are not part of this repository and remain
+under their own licenses.
